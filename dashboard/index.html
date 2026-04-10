@@ -1,0 +1,822 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vigil — AI QA Automation Platform</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <h1>Vigil</h1>
+            <p class="subtitle">AI QA Automation Platform</p>
+        </div>
+        <div id="stats" class="stats-bar"></div>
+        <button class="tour-start-btn" onclick="startTour()" title="Start guided tour">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M8 1a7 7 0 1 0 0 14A7 7 0 0 0 8 1ZM0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm6.5-3a1.5 1.5 0 0 0-1.12.488.75.75 0 0 1-1.111-1.008A3 3 0 1 1 8 8.75a.75.75 0 0 1-.75-.75v-1a.75.75 0 0 1 1.5 0v.32A1.5 1.5 0 0 0 6.5 5ZM8 12a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"/></svg>
+            Tour
+        </button>
+    </header>
+
+    <main>
+        <!-- Hero / Project Explanation Section -->
+        <section class="hero-section">
+            <div class="hero-bg">
+                <svg width="100%" height="100%" viewBox="0 0 800 250" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <linearGradient id="glow" x1="0%" y1="0%" x2="100%" y2="0%">
+                            <stop offset="0%" stop-color="rgba(94, 106, 210, 0)" />
+                            <stop offset="50%" stop-color="#5e6ad2" />
+                            <stop offset="100%" stop-color="rgba(94, 106, 210, 0)" />
+                        </linearGradient>
+                        <filter id="blur" x="-20%" y="-20%" width="140%" height="140%">
+                            <feGaussianBlur stdDeviation="4" />
+                        </filter>
+                    </defs>
+                    
+                    <!-- Base Grid / Network Paths -->
+                    <path d="M -100 125 C 100 125, 200 185, 400 125 C 600 65, 700 125, 900 125" fill="none" stroke="var(--border)" stroke-width="1" />
+                    <path d="M -100 125 C 100 125, 200 65, 400 125 C 600 185, 700 125, 900 125" fill="none" stroke="var(--border)" stroke-width="1" />
+                    
+                    <!-- Animated Flow Paths -->
+                    <g class="anim-group" style="animation-delay: 0s;">
+                        <path class="anim-path" d="M -100 125 C 100 125, 200 185, 400 125 C 600 65, 700 125, 900 125" fill="none" stroke="url(#glow)" stroke-width="4" filter="url(#blur)" />
+                        <path class="anim-path-core" d="M -100 125 C 100 125, 200 185, 400 125 C 600 65, 700 125, 900 125" fill="none" stroke="#ffffff" stroke-width="1.5" />
+                    </g>
+                    
+                    <g class="anim-group" style="animation-delay: 3s;">
+                        <path class="anim-path" d="M -100 125 C 100 125, 200 65, 400 125 C 600 185, 700 125, 900 125" fill="none" stroke="url(#glow)" stroke-width="4" filter="url(#blur)" />
+                        <path class="anim-path-core" d="M -100 125 C 100 125, 200 65, 400 125 C 600 185, 700 125, 900 125" fill="none" stroke="#ffffff" stroke-width="1.5" />
+                    </g>
+
+                    <!-- Connection Nodes -->
+                    <circle cx="150" cy="155" r="4" fill="var(--bg)" stroke="var(--border)" stroke-width="2" class="anim-node" style="animation-delay: 1s;" />
+                    <circle cx="150" cy="95" r="4" fill="var(--bg)" stroke="var(--border)" stroke-width="2" class="anim-node" style="animation-delay: 4s;" />
+                    
+                    <circle cx="400" cy="125" r="6" fill="var(--bg)" stroke="var(--brand)" stroke-width="2" class="anim-node-main" />
+                    
+                    <circle cx="650" cy="95" r="4" fill="var(--bg)" stroke="var(--border)" stroke-width="2" class="anim-node" style="animation-delay: 2.5s;" />
+                    <circle cx="650" cy="155" r="4" fill="var(--bg)" stroke="var(--border)" stroke-width="2" class="anim-node" style="animation-delay: 5.5s;" />
+                </svg>
+            </div>
+            <div class="hero-content">
+                <div class="hero-badge">✨ Next-Generation QA Automation</div>
+                <h2 class="hero-title">Vigil</h2>
+                <p class="hero-desc">
+                    The AI-powered QA automation platform that never sleeps. Vigil replaces fragile scripts with AI-driven intent. 
+                    It autonomously explores your applications, captures user journeys, and generates deterministic tests 
+                    &mdash; then heals them when your UI changes.
+                </p>
+                
+                <div class="hero-carousel-container">
+                    <button class="carousel-btn prev-btn" onclick="moveCarousel(-1)">&#10094;</button>
+                    <div class="hero-carousel-track" id="hero-carousel">
+                        <!-- Slide 1 -->
+                        <div class="carousel-slide active">
+                            <div class="slide-icon">&#127758;</div>
+                            <div class="slide-text">
+                                <h3>Autonomous Explorer</h3>
+                                <p>Provide a URL, and our AI agent systematically crawls, interacts, and maps every flow in your app without human guidance.</p>
+                            </div>
+                        </div>
+                        <!-- Slide 2 -->
+                        <div class="carousel-slide">
+                            <div class="slide-icon">&#128376;</div>
+                            <div class="slide-text">
+                                <h3>Semantic Capture</h3>
+                                <p>Chrome extension captures your natural browsing (clicks, typing) and groups them into logical functional journeys.</p>
+                            </div>
+                        </div>
+                        <!-- Slide 3 -->
+                        <div class="carousel-slide">
+                            <div class="slide-icon">&#129656;</div>
+                            <div class="slide-text">
+                                <h3>Vision Auto-Healing</h3>
+                                <p>When a test breaks, the LLM analyzes the DOM and screenshot to find the new element location and patches the test code instantly.</p>
+                            </div>
+                        </div>
+                        <!-- Slide 4 -->
+                        <div class="carousel-slide">
+                            <div class="slide-icon">&#9997;</div>
+                            <div class="slide-text">
+                                <h3>NL Test Generation</h3>
+                                <p>Write "Log in and checkout" in plain English, and our AI generates robust Playwright test code automatically.</p>
+                            </div>
+                        </div>
+                        <!-- Slide 5 -->
+                        <div class="carousel-slide">
+                            <div class="slide-icon">&#128269;</div>
+                            <div class="slide-text">
+                                <h3>Root Cause Analysis</h3>
+                                <p>Analyzes failures across test runs to identify flaky tests, common failure patterns, and suggests root cause fixes.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="carousel-btn next-btn" onclick="moveCarousel(1)">&#10095;</button>
+                </div>
+                
+                <div class="carousel-dots" id="carousel-dots">
+                    <span class="dot active" onclick="setCarousel(0)"></span>
+                    <span class="dot" onclick="setCarousel(1)"></span>
+                    <span class="dot" onclick="setCarousel(2)"></span>
+                    <span class="dot" onclick="setCarousel(3)"></span>
+                    <span class="dot" onclick="setCarousel(4)"></span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Upload Section -->
+        <section class="upload-section">
+            <h2>Import Captured Events</h2>
+            <p class="section-desc">Export events from the Chrome extension, then upload the JSON file here to discover journeys.</p>
+            <div class="upload-row">
+                <label class="upload-label" for="file-upload">
+                    <span class="upload-icon">+</span>
+                    <span id="file-name">Choose JSON file...</span>
+                </label>
+                <input type="file" id="file-upload" accept=".json" hidden>
+                <button class="btn btn-primary" id="upload-btn" disabled>Process Events</button>
+            </div>
+            <div id="upload-status" class="upload-status hidden"></div>
+        </section>
+
+        <!-- Chat Section -->
+        <section class="chat-section">
+            <h2>Ask about your testing</h2>
+            <div id="chat-messages" class="chat-messages">
+                <div class="message bot">
+                    What would you like to know? Try: "checkout", "login", or "What did QA cover?"
+                </div>
+            </div>
+            <form id="chat-form" class="chat-input">
+                <input type="text" id="chat-input" placeholder="Search journeys..." autocomplete="off">
+                <button type="submit">Ask</button>
+            </form>
+        </section>
+
+        <!-- Journeys Section -->
+        <section class="journeys-section">
+            <div class="section-header">
+                <h2>Discovered Journeys</h2>
+                <div class="filters">
+                    <select id="domain-filter">
+                        <option value="">All Domains</option>
+                    </select>
+                </div>
+            </div>
+            <div id="journeys-list" class="journeys-list">
+                <p class="empty-state">No journeys discovered yet.<br>Upload captured events or run: <code>python -m testai.demo</code></p>
+            </div>
+        </section>
+
+        <!-- Review Queue Section -->
+        <section class="review-section">
+            <div class="section-header">
+                <h2>Review Queue</h2>
+                <button class="btn btn-outline btn-sm" onclick="openHITLConfigModal()">&#9881; Config</button>
+            </div>
+            <div id="review-stats-bar" class="review-stats-bar"></div>
+            <div class="review-filters">
+                <select id="review-status-filter" onchange="loadReviewQueue()">
+                    <option value="pending_review">Pending Review</option>
+                    <option value="">All Statuses</option>
+                    <option value="auto_approved">Auto-Approved</option>
+                    <option value="approved">Human Approved</option>
+                    <option value="rejected">Rejected</option>
+                </select>
+                <select id="review-domain-filter" onchange="loadReviewQueue()">
+                    <option value="">All Domains</option>
+                </select>
+                <div class="review-batch-actions">
+                    <label class="review-select-all-label">
+                        <input type="checkbox" id="review-select-all" onchange="toggleSelectAllReviews(this.checked)">
+                        <span>Select All</span>
+                    </label>
+                    <button class="btn btn-outline btn-sm" id="batch-approve-btn" onclick="batchApproveSelected()" disabled>Batch Approve</button>
+                </div>
+            </div>
+            <div id="review-queue-list" class="review-queue-list">
+                <p class="empty-state">Loading review queue...</p>
+            </div>
+        </section>
+
+        <!-- Run History Section -->
+        <section class="runs-section">
+            <div class="section-header">
+                <h2>Test Run History</h2>
+                <div id="run-stats" class="run-stats-bar"></div>
+            </div>
+            <div id="runs-list" class="runs-list">
+                <p class="empty-state">No test runs yet. Replay a journey to see results here.</p>
+            </div>
+        </section>
+
+        <!-- AI Features Section -->
+        <section class="ai-section">
+            <div class="section-header">
+                <h2>AI Features</h2>
+                <span id="llm-provider-badge" class="llm-badge">not configured</span>
+            </div>
+            <div class="ai-cards">
+                <div class="ai-card ai-card-explorer" onclick="openExplorerModal()">
+                    <div class="ai-card-icon">&#127758;</div>
+                    <div class="ai-card-title">AI Explorer</div>
+                    <div class="ai-card-desc">Autonomously discover all app flows — just give it a URL</div>
+                </div>
+                <div class="ai-card" onclick="openNLTestModal()">
+                    <div class="ai-card-icon">&#9997;</div>
+                    <div class="ai-card-title">Generate Test</div>
+                    <div class="ai-card-desc">Create a Playwright test from a plain-English description</div>
+                </div>
+                <div class="ai-card" onclick="openRCAModal()">
+                    <div class="ai-card-icon">&#128269;</div>
+                    <div class="ai-card-title">Root Cause Analysis</div>
+                    <div class="ai-card-desc">Analyze failure patterns and find flaky tests</div>
+                </div>
+                <div class="ai-card" onclick="openCIModal()">
+                    <div class="ai-card-icon">&#9881;</div>
+                    <div class="ai-card-title">CI/CD Pipeline</div>
+                    <div class="ai-card-desc">Generate GitHub Actions workflow for automated test runs</div>
+                </div>
+                <div class="ai-card" onclick="openAuditModal()">
+                    <div class="ai-card-icon">&#128203;</div>
+                    <div class="ai-card-title">Site Audit</div>
+                    <div class="ai-card-desc">AI-powered quality assessment — usability, a11y, performance, tech stack</div>
+                </div>
+                <div class="ai-card" onclick="openSettingsModal()">
+                    <div class="ai-card-icon">&#128736;</div>
+                    <div class="ai-card-title">LLM Settings</div>
+                    <div class="ai-card-desc">Configure OpenAI, Claude, Gemini, OpenRouter, NVIDIA, or Ollama</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Coverage Section -->
+        <section class="coverage-section">
+            <h2>Coverage Overview</h2>
+            <div id="coverage-grid" class="coverage-grid"></div>
+        </section>
+    </main>
+
+    <!-- LLM Settings Modal -->
+    <div id="settings-modal" class="modal hidden">
+        <div class="modal-content modal-settings">
+            <button class="modal-close" onclick="closeSettingsModal()">&times;</button>
+            <h2>LLM Provider Settings</h2>
+            <p class="section-desc">Connect a cloud LLM for smarter auto-healing (with vision), assertion generation, NL test creation, and root cause analysis.</p>
+
+            <div class="settings-form">
+                <label class="replay-label">Provider</label>
+                <select id="settings-provider" class="settings-select" onchange="onProviderChange()">
+                    <option value="ollama">Ollama — Local, free, no API key</option>
+                </select>
+
+                <div id="settings-key-row" class="settings-key-row hidden">
+                    <label class="replay-label">API Key</label>
+                    <input type="password" id="settings-api-key" class="replay-url-input" placeholder="sk-... / claude-... / your-key">
+                </div>
+
+                <label class="replay-label" style="margin-top:0.75rem">Model</label>
+                <select id="settings-model" class="settings-select"></select>
+
+                <div class="settings-actions">
+                    <button class="btn btn-primary" onclick="saveLLMSettings()">Save</button>
+                    <button class="btn btn-outline btn-sm" onclick="testLLMConnection()">Test Connection</button>
+                    <span id="settings-status" class="settings-status"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- NL Test Generator Modal -->
+    <div id="nl-test-modal" class="modal hidden">
+        <div class="modal-content modal-replay">
+            <button class="modal-close" onclick="closeNLTestModal()">&times;</button>
+            <h2>Generate Test from Description</h2>
+            <p class="section-desc">Describe what you want to test in plain English. The AI will generate a complete Playwright test.</p>
+
+            <label class="replay-label">Base URL</label>
+            <input type="text" id="nl-base-url" class="replay-url-input" placeholder="https://your-app.example.com" style="margin-bottom:0.75rem">
+
+            <label class="replay-label">Test Description</label>
+            <textarea id="nl-description" class="nl-textarea" rows="4" placeholder="e.g. Log in with valid credentials, navigate to the dashboard, and verify the welcome message is shown"></textarea>
+
+            <button class="btn btn-primary" style="margin-top:0.75rem" onclick="generateNLTest()">Generate Test</button>
+
+            <div class="replay-terminal" style="margin-top:0.75rem">
+                <div class="terminal-bar">
+                    <span class="term-dot red"></span><span class="term-dot yellow"></span><span class="term-dot green"></span>
+                    <span class="terminal-title">generated test</span>
+                </div>
+                <div id="nl-output" class="terminal-body" style="min-height:200px">
+                    <span class="term-dim">Describe your test above and click Generate...</span>
+                </div>
+            </div>
+            <button id="nl-download-btn" class="btn btn-outline btn-sm hidden" style="margin-top:0.5rem" onclick="downloadNLTest()">Download .py</button>
+        </div>
+    </div>
+
+    <!-- RCA Modal -->
+    <div id="rca-modal" class="modal hidden">
+        <div class="modal-content modal-replay">
+            <button class="modal-close" onclick="closeRCAModal()">&times;</button>
+            <h2>Root Cause Analysis</h2>
+            <p class="section-desc">AI analyzes your recent test failures to find patterns, flaky tests, and suggest fixes.</p>
+
+            <button class="btn btn-primary" onclick="runRCA()">Analyze Failures</button>
+
+            <div id="rca-output" class="rca-output" style="margin-top:1rem">
+                <span class="term-dim">Click Analyze to inspect recent failures...</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- AI Explorer Modal -->
+    <div id="explorer-modal" class="modal hidden">
+        <div class="modal-content modal-explorer">
+            <button class="modal-close" onclick="closeExplorerModal()">&times;</button>
+            <div class="explorer-header">
+                <span class="explorer-icon">&#127758;</span>
+                <div>
+                    <h2>AI Explorer</h2>
+                    <p class="section-desc">Autonomously explore any web app and discover all user flows</p>
+                </div>
+                <span id="explorer-session-status" class="explorer-status hidden"></span>
+            </div>
+
+            <div id="explorer-config" class="explorer-config">
+                <label class="replay-label">Target URL</label>
+                <input type="text" id="explorer-url" class="replay-url-input"
+                       placeholder="https://your-app.example.com">
+
+                <div class="explorer-options">
+                    <div class="explorer-option-group">
+                        <label class="replay-label">Strategy</label>
+                        <select id="explorer-strategy" class="settings-select">
+                            <option value="bfs">Breadth-First (wide coverage)</option>
+                            <option value="dfs">Depth-First (deep flows)</option>
+                        </select>
+                    </div>
+                    <div class="explorer-option-group">
+                        <label class="replay-label">Max Pages</label>
+                        <input type="range" id="explorer-max-pages" min="5" max="100" value="30"
+                               oninput="document.getElementById('max-pages-val').textContent=this.value">
+                        <span id="max-pages-val" class="range-val">30</span>
+                    </div>
+                    <div class="explorer-option-group">
+                        <label class="replay-label">Time Limit (min)</label>
+                        <input type="range" id="explorer-max-time" min="2" max="30" value="10"
+                               oninput="document.getElementById('max-time-val').textContent=this.value">
+                        <span id="max-time-val" class="range-val">10</span>
+                    </div>
+                </div>
+
+                <label class="replay-label" style="margin-top:0.75rem">QA Skills <span class="skills-hint">(shape the AI's curiosity)</span></label>
+                <div id="skills-grid" class="skills-grid">
+                    <!-- Populated by JS -->
+                </div>
+                <div class="skills-bundles">
+                    <span class="skills-bundle-label">Presets:</span>
+                    <button class="btn btn-outline btn-xs" onclick="applySkillBundle('quick_scan')">Quick Scan</button>
+                    <button class="btn btn-outline btn-xs" onclick="applySkillBundle('deep_qa')">Deep QA</button>
+                    <button class="btn btn-outline btn-xs" onclick="applySkillBundle('security_focused')">Security</button>
+                    <button class="btn btn-outline btn-xs" onclick="applySkillBundle('accessibility_audit')">Accessibility</button>
+                    <button class="btn btn-outline btn-xs" onclick="applySkillBundle('full_regression')">Full Regression</button>
+                </div>
+
+                <label class="replay-checkbox-label">
+                    <input type="checkbox" id="explorer-headed" checked>
+                    <span>Show browser (headed mode)</span>
+                </label>
+
+                <div class="settings-actions" style="margin-top:1rem">
+                    <button id="explorer-start-btn" class="btn btn-primary" onclick="startExploration()">
+                        &#127758; Start Exploring
+                    </button>
+                    <button id="explorer-stop-btn" class="btn btn-outline btn-sm hidden" onclick="stopExploration()">
+                        Stop
+                    </button>
+                </div>
+            </div>
+
+            <div id="explorer-progress" class="explorer-progress hidden">
+                <div class="explorer-stats-row">
+                    <div class="explorer-stat">
+                        <div class="explorer-stat-value" id="explorer-pages-count">0</div>
+                        <div class="explorer-stat-label">Pages</div>
+                    </div>
+                    <div class="explorer-stat">
+                        <div class="explorer-stat-value" id="explorer-steps-count">0</div>
+                        <div class="explorer-stat-label">Steps</div>
+                    </div>
+                    <div class="explorer-stat">
+                        <div class="explorer-stat-value" id="explorer-flows-count">0</div>
+                        <div class="explorer-stat-label">Flows</div>
+                    </div>
+                </div>
+
+                <div class="explorer-log-container">
+                    <div class="terminal-bar">
+                        <span class="term-dot red"></span><span class="term-dot yellow"></span><span class="term-dot green"></span>
+                        <span class="terminal-title">exploration log</span>
+                    </div>
+                    <div id="explorer-log" class="terminal-body explorer-log"></div>
+                </div>
+            </div>
+
+            <div id="explorer-results" class="explorer-results hidden">
+                <h3>Discovered Journeys</h3>
+                <div id="explorer-journeys-list" class="explorer-journeys-list"></div>
+                <div class="settings-actions" style="margin-top:1rem">
+                    <button class="btn btn-primary" onclick="saveExplorerJourneys()">
+                        Save All Journeys
+                    </button>
+                    <span id="explorer-save-status" class="settings-status"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- CI/CD Pipeline Modal -->
+    <div id="ci-modal" class="modal hidden">
+        <div class="modal-content modal-replay">
+            <button class="modal-close" onclick="closeCIModal()">&times;</button>
+            <h2>Generate CI/CD Pipeline</h2>
+            <p class="section-desc">Create a ready-to-use GitHub Actions workflow that runs your exported tests automatically on every push.</p>
+
+            <div class="replay-config">
+                <label class="replay-label">Framework</label>
+                <select id="ci-framework" class="settings-select">
+                    <option value="playwright">Playwright (Python)</option>
+                    <option value="cypress">Cypress (JavaScript)</option>
+                </select>
+
+                <label class="replay-label">Base URL</label>
+                <input type="text" id="ci-base-url" class="replay-url-input" placeholder="https://your-app.example.com">
+
+                <label class="replay-label">Schedule (cron, optional)</label>
+                <input type="text" id="ci-cron" class="replay-url-input" placeholder="0 6 * * 1-5 (Mon-Fri 6am UTC)">
+
+                <label class="replay-checkbox-label" style="margin-top:12px">
+                    <input type="checkbox" id="ci-auth">
+                    <span>Requires authentication (auth.json)</span>
+                </label>
+            </div>
+
+            <button class="btn btn-primary" style="margin-top:12px" onclick="generateCI()">Generate Workflow</button>
+
+            <div class="replay-terminal" style="margin-top:16px">
+                <div class="terminal-bar">
+                    <span class="term-dot red"></span><span class="term-dot yellow"></span><span class="term-dot green"></span>
+                    <span class="terminal-title">.github/workflows/vigil.yml</span>
+                </div>
+                <div id="ci-output" class="terminal-body" style="min-height:200px">
+                    <span class="term-dim">Configure options above and click Generate...</span>
+                </div>
+            </div>
+            <button id="ci-download-btn" class="btn btn-outline btn-sm hidden" style="margin-top:8px" onclick="downloadCI()">Download .yml</button>
+        </div>
+    </div>
+
+    <!-- Journey Detail Modal -->
+    <div id="journey-modal" class="modal hidden">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal()">&times;</button>
+            <div id="modal-body"></div>
+        </div>
+    </div>
+
+    <!-- Replay Modal -->
+    <div id="replay-modal" class="modal hidden">
+        <div class="modal-content modal-replay">
+            <button class="modal-close" onclick="closeReplayModal()">&times;</button>
+            <input type="hidden" id="replay-journey-id">
+
+            <div class="replay-header">
+                <span class="replay-icon">▶</span>
+                <div>
+                    <h2 id="replay-title">Replay Journey</h2>
+                    <p class="section-desc">Run the captured QA session against any URL</p>
+                </div>
+                <span id="replay-status" class="replay-status hidden"></span>
+            </div>
+
+            <div class="replay-config">
+                <label class="replay-label">Base URL</label>
+                <div class="replay-url-row">
+                    <input type="text" id="replay-base-url"
+                           placeholder="https://your-app.example.com"
+                           class="replay-url-input"
+                           oninput="checkAuthForUrl(this.value)">
+                    <button id="replay-run-btn" class="btn btn-primary replay-run" onclick="runReplay()">▶ Run Replay</button>
+                </div>
+
+                <div id="replay-auth-section" class="replay-auth-section">
+                    <div class="replay-auth-row">
+                        <span id="replay-auth-status" class="auth-badge no-auth">No auth</span>
+                        <button class="btn btn-sm btn-auth-gen" onclick="generateAuth()" title="Opens a browser — log in, close it, done">
+                            Generate Auth
+                        </button>
+                        <label class="btn btn-sm btn-outline" for="auth-file-upload">Upload</label>
+                        <input type="file" id="auth-file-upload" accept=".json" hidden onchange="uploadAuthFile(this)">
+                        <a id="replay-auth-download" class="btn btn-sm btn-outline auth-download-link hidden" href="#" download>Download</a>
+                    </div>
+                    <div id="replay-auth-msg" class="replay-auth-msg"></div>
+                </div>
+
+                <div class="replay-options">
+                    <label class="replay-checkbox-label">
+                        <input type="checkbox" id="replay-headed" checked>
+                        <span>Show browser (headed mode)</span>
+                    </label>
+                    <label class="replay-checkbox-label">
+                        <input type="checkbox" id="replay-auto-heal" checked>
+                        <span>Auto-heal with AI</span>
+                        <span id="ollama-status" class="ollama-badge">checking...</span>
+                    </label>
+                </div>
+                <p class="replay-hint">Runs against any environment — staging, localhost, or prod.</p>
+                <div id="replay-env-vars"></div>
+            </div>
+
+            <div id="replay-progress" class="replay-progress hidden">
+                <div class="progress-bar">
+                    <div id="progress-fill" class="progress-fill"></div>
+                </div>
+                <span id="progress-text" class="progress-text"></span>
+            </div>
+
+            <div class="replay-terminal">
+                <div class="terminal-bar">
+                    <span class="term-dot red"></span>
+                    <span class="term-dot yellow"></span>
+                    <span class="term-dot green"></span>
+                    <span class="terminal-title">pytest output</span>
+                </div>
+                <div id="replay-output" class="terminal-body">
+                    <span class="term-dim">Waiting to run…</span>
+                </div>
+            </div>
+
+            <div id="replay-screenshots" class="replay-screenshots hidden">
+                <div class="replay-screenshots-header">
+                    <span>Step Screenshots</span>
+                    <span id="screenshot-counter" class="screenshot-counter"></span>
+                </div>
+                <div class="screenshot-carousel">
+                    <button id="ss-prev" class="ss-arrow ss-arrow-left" onclick="screenshotNav(-1)" title="Previous step">&#8249;</button>
+                    <div id="screenshot-strip" class="screenshot-strip"></div>
+                    <button id="ss-next" class="ss-arrow ss-arrow-right" onclick="screenshotNav(1)" title="Next step">&#8250;</button>
+                </div>
+                <div id="screenshot-dots" class="screenshot-dots"></div>
+            </div>
+
+            <!-- Diagnostics panel – shown after replay when data is available -->
+            <div id="diagnostics-panel" class="diagnostics-panel hidden">
+                <div class="diag-header" onclick="toggleDiagnostics()">
+                    <span class="diag-title">
+                        <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor" style="vertical-align:-2px;margin-right:5px"><path d="M8 1a7 7 0 1 0 0 14A7 7 0 0 0 8 1ZM0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-3a.75.75 0 0 1 .75.75v3.5a.75.75 0 0 1-1.5 0v-3.5A.75.75 0 0 1 8 5Zm0 7a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"/></svg>
+                        Replay Diagnostics
+                    </span>
+                    <span id="diag-summary" class="diag-summary"></span>
+                    <span id="diag-chevron" class="diag-chevron">▾</span>
+                </div>
+                <div id="diag-body" class="diag-body">
+                    <div id="diag-console" class="diag-section hidden">
+                        <div class="diag-section-title diag-error">
+                            <span>⛔ Console Errors</span>
+                            <span id="diag-console-count" class="diag-count"></span>
+                        </div>
+                        <ul id="diag-console-list" class="diag-list"></ul>
+                    </div>
+                    <div id="diag-network" class="diag-section hidden">
+                        <div class="diag-section-title diag-warn">
+                            <span>⚡ Network Failures</span>
+                            <span id="diag-network-count" class="diag-count"></span>
+                        </div>
+                        <ul id="diag-network-list" class="diag-list"></ul>
+                    </div>
+                    <div id="diag-api" class="diag-section hidden">
+                        <div class="diag-section-title diag-info">
+                            <span>🔗 API Calls</span>
+                            <span id="diag-api-count" class="diag-count"></span>
+                        </div>
+                        <ul id="diag-api-list" class="diag-list"></ul>
+                    </div>
+                    <div id="diag-empty" class="diag-empty hidden">No console errors, network failures, or API calls captured.</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- HITL Config Modal -->
+    <div id="hitl-config-modal" class="modal hidden">
+        <div class="modal-content modal-settings">
+            <button class="modal-close" onclick="closeHITLConfigModal()">&times;</button>
+            <h2>HITL Review Settings</h2>
+            <p class="section-desc">Configure automatic approval thresholds. Journeys above the threshold are auto-approved; below are queued for human review.</p>
+            <div class="settings-form">
+                <label class="replay-label">Auto-Approve Threshold</label>
+                <div class="threshold-slider-row">
+                    <input type="range" id="hitl-threshold-slider" min="0.5" max="1.0" step="0.05" value="0.85"
+                           oninput="document.getElementById('hitl-threshold-val').textContent = (this.value * 100).toFixed(0) + '%'">
+                    <span id="hitl-threshold-val" class="range-val">85%</span>
+                </div>
+                <p class="settings-hint">Journeys with confidence &ge; this threshold skip human review.</p>
+                <div class="settings-actions">
+                    <button class="btn btn-primary" onclick="saveHITLConfig()">Save</button>
+                    <span id="hitl-config-status" class="settings-status"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Correct Journey Modal -->
+    <div id="correct-modal" class="modal hidden">
+        <div class="modal-content modal-settings">
+            <button class="modal-close" onclick="closeCorrectModal()">&times;</button>
+            <h2>Correct Journey Labels</h2>
+            <p class="section-desc">Edit the AI's labels, then save to approve. Your corrections improve future labeling.</p>
+            <input type="hidden" id="correct-journey-id">
+            <div class="correct-comparison">
+                <div class="correct-side correct-ai">
+                    <h3>AI Suggestion</h3>
+                    <div id="correct-ai-name" class="correct-field"></div>
+                    <div id="correct-ai-domain" class="correct-field"></div>
+                    <div id="correct-ai-feature" class="correct-field"></div>
+                    <div id="correct-ai-confidence" class="correct-field"></div>
+                </div>
+                <div class="correct-side correct-human">
+                    <h3>Your Correction</h3>
+                    <label class="replay-label">Name</label>
+                    <input type="text" id="correct-name" class="replay-url-input">
+                    <label class="replay-label">Domain</label>
+                    <input type="text" id="correct-domain" class="replay-url-input" list="correct-domain-list">
+                    <datalist id="correct-domain-list"></datalist>
+                    <label class="replay-label">Feature</label>
+                    <input type="text" id="correct-feature" class="replay-url-input" list="correct-feature-list">
+                    <datalist id="correct-feature-list"></datalist>
+                    <label class="replay-label">Tags (comma separated)</label>
+                    <input type="text" id="correct-tags" class="replay-url-input" placeholder="regression, smoke, login">
+                    <label class="replay-label">Note (optional)</label>
+                    <input type="text" id="correct-note" class="replay-url-input" placeholder="Why did you correct this?">
+                </div>
+            </div>
+            <div class="settings-actions" style="margin-top:1rem">
+                <button class="btn btn-primary" onclick="submitCorrection()">Save &amp; Approve</button>
+                <span id="correct-status" class="settings-status"></span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Explore Modal -->
+    <div id="explore-modal" class="modal hidden">
+        <div class="modal-content modal-explore">
+            <button class="modal-close" onclick="closeExploreModal()">&times;</button>
+            <input type="hidden" id="explore-journey-id">
+
+            <div class="replay-header">
+                <span class="replay-icon">&#128270;</span>
+                <div>
+                    <h2 id="explore-title">Explore Journey</h2>
+                    <p class="section-desc">Automatically test edge cases: empty fields, invalid formats, boundary values, skipped steps</p>
+                </div>
+            </div>
+
+            <div class="replay-config">
+                <label class="replay-label">Base URL</label>
+                <div class="replay-url-row">
+                    <input type="text" id="explore-base-url"
+                           placeholder="https://your-app.example.com"
+                           class="replay-url-input">
+                    <button id="explore-run-btn" class="btn btn-explore" onclick="runExploration()">&#128270; Run Exploration</button>
+                </div>
+                <p class="replay-hint">Runs mutation variants to find validation bugs. No auth injection — raw app behavior.</p>
+                <label class="replay-checkbox-label">
+                    <input type="checkbox" id="explore-autoresearch" checked>
+                    <span>Deep Research</span>
+                    <span class="explore-research-badge">DOM + AI</span>
+                </label>
+            </div>
+
+            <div id="explore-research-panel" class="explore-research-panel hidden">
+                <span id="explore-research-status"></span>
+            </div>
+
+            <div class="explore-progress-row">
+                <span id="explore-progress-text" class="explore-progress-text">Ready</span>
+            </div>
+
+            <div id="explore-summary"></div>
+
+            <div class="explore-table-wrap">
+                <table class="explore-table">
+                    <thead>
+                        <tr>
+                            <th>Variant</th>
+                            <th>Result</th>
+                            <th>App Behavior</th>
+                            <th>Duration</th>
+                            <th>Log</th>
+                        </tr>
+                    </thead>
+                    <tbody id="explore-table-body"></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Site Audit Modal -->
+    <div id="audit-modal" class="modal hidden">
+        <div class="modal-content modal-explorer">
+            <button class="modal-close" onclick="closeAuditModal()">&times;</button>
+            <div class="explorer-header">
+                <span class="explorer-icon">&#128203;</span>
+                <div>
+                    <h2>AI Site Quality Audit</h2>
+                    <p class="section-desc">AI-powered usability, performance, accessibility, and tech stack assessment</p>
+                </div>
+            </div>
+            <div class="explorer-config">
+                <label class="replay-label">Target URL</label>
+                <input type="text" id="audit-url" class="replay-url-input" placeholder="https://example.com">
+                <button id="audit-run-btn" class="btn btn-primary" style="margin-top:0.75rem" onclick="runSiteAudit()">Run Audit</button>
+            </div>
+            <div id="audit-loading" class="hidden" style="text-align:center;padding:2rem">
+                <div class="spinner"></div>
+                <p style="margin-top:1rem;color:var(--muted)">Auditing site... analyzing DOM, performance, and tech stack...</p>
+            </div>
+            <div id="audit-results" class="hidden" style="margin-top:1rem"></div>
+        </div>
+    </div>
+
+    <!-- Performance Modal -->
+    <div id="perf-modal" class="modal hidden">
+        <div class="modal-content modal-explorer">
+            <button class="modal-close" onclick="closePerfModal()">&times;</button>
+            <div class="explorer-header">
+                <span class="explorer-icon">&#9202;</span>
+                <div>
+                    <h2>Performance Telemetry</h2>
+                    <p class="section-desc">Step timing and Web Vitals across test runs</p>
+                </div>
+            </div>
+            <div id="perf-loading" class="hidden" style="text-align:center;padding:2rem">
+                <div class="spinner"></div>
+            </div>
+            <div id="perf-results" style="margin-top:1rem"></div>
+        </div>
+    </div>
+
+    <!-- Expansion Progress Modal -->
+    <div id="expand-modal" class="modal hidden">
+        <div class="modal-content modal-explorer">
+            <button class="modal-close" onclick="closeExpandModal()">&times;</button>
+            <div class="explorer-header">
+                <span class="explorer-icon">&#127793;</span>
+                <div>
+                    <h2>Discovering Related Flows</h2>
+                    <p class="section-desc">AI is exploring alternative paths, edge cases, and sibling features</p>
+                </div>
+            </div>
+            <div id="expand-progress" class="explorer-progress">
+                <div class="explorer-stats-row">
+                    <div class="explorer-stat">
+                        <div class="explorer-stat-value" id="expand-pages-count">0</div>
+                        <div class="explorer-stat-label">Pages</div>
+                    </div>
+                    <div class="explorer-stat">
+                        <div class="explorer-stat-value" id="expand-steps-count">0</div>
+                        <div class="explorer-stat-label">Steps</div>
+                    </div>
+                    <div class="explorer-stat">
+                        <div class="explorer-stat-value" id="expand-flows-count">0</div>
+                        <div class="explorer-stat-label">Flows</div>
+                    </div>
+                </div>
+                <div class="explorer-log-container">
+                    <div class="terminal-bar">
+                        <span class="term-dot red"></span><span class="term-dot yellow"></span><span class="term-dot green"></span>
+                        <span class="terminal-title">expansion log</span>
+                    </div>
+                    <div id="expand-log" class="terminal-body explorer-log"></div>
+                </div>
+            </div>
+            <div id="expand-results" class="explorer-results hidden">
+                <h3>Discovered Related Journeys</h3>
+                <div id="expand-journeys-list" class="explorer-journeys-list"></div>
+                <div class="settings-actions" style="margin-top:1rem">
+                    <button class="btn btn-primary" onclick="saveExpandedJourneys()">Save All Journeys</button>
+                    <span id="expand-save-status" class="settings-status"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="/static/app.js"></script>
+</body>
+</html>

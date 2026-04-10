@@ -1,0 +1,284 @@
+[
+  {
+    "type": "pageload",
+    "url": "http://localhost:8000/",
+    "pageTitle": "Vigil \u2014 Journey Dashboard",
+    "id": "3dd64fe3-a91f-40dc-9e0f-d1095533d0f4",
+    "timestamp": 1771953219018,
+    "sessionId": "ac058a87-d792-4b75-9ebe-b7f1fdab90f2",
+    "tabId": 1,
+    "navigation": {
+      "fromUrl": "",
+      "toUrl": "http://localhost:8000/",
+      "trigger": "pageload"
+    }
+  },
+  {
+    "type": "input",
+    "url": "http://localhost:8000/",
+    "pageTitle": "Vigil \u2014 Journey Dashboard",
+    "id": "bd3b5509-813c-4bc4-98d7-d923c81ef7f5",
+    "timestamp": 1771953222018,
+    "sessionId": "ac058a87-d792-4b75-9ebe-b7f1fdab90f2",
+    "tabId": 1,
+    "element": {
+      "tagName": "input",
+      "selectors": {
+        "css": "#chat-input",
+        "text": null,
+        "ariaLabel": null,
+        "testId": null,
+        "testIdAttr": null,
+        "name": null,
+        "placeholder": "Search journeys..."
+      },
+      "inputType": "text",
+      "value": "checkout"
+    }
+  },
+  {
+    "type": "click",
+    "url": "http://localhost:8000/",
+    "pageTitle": "Vigil \u2014 Journey Dashboard",
+    "id": "69b97157-f4e8-4e4a-a599-8d2cedce1472",
+    "timestamp": 1771953224018,
+    "sessionId": "ac058a87-d792-4b75-9ebe-b7f1fdab90f2",
+    "tabId": 1,
+    "element": {
+      "tagName": "button",
+      "selectors": {
+        "css": "#chat-form button[type='submit']",
+        "text": "Ask",
+        "ariaLabel": null,
+        "testId": null,
+        "testIdAttr": null
+      },
+      "inputType": null,
+      "value": null
+    }
+  },
+  {
+    "type": "submit",
+    "url": "http://localhost:8000/",
+    "pageTitle": "Vigil \u2014 Journey Dashboard",
+    "id": "5010bad8-330c-455c-82c2-fbe8784a6396",
+    "timestamp": 1771953224018,
+    "sessionId": "ac058a87-d792-4b75-9ebe-b7f1fdab90f2",
+    "tabId": 1,
+    "element": {
+      "tagName": "form",
+      "selectors": {
+        "css": "#chat-form",
+        "text": null,
+        "ariaLabel": null,
+        "testId": null
+      },
+      "inputType": null,
+      "value": null
+    }
+  },
+  {
+    "type": "click",
+    "url": "http://localhost:8000/",
+    "pageTitle": "Vigil \u2014 Journey Dashboard",
+    "id": "9a2a0241-b4d4-431e-85e5-643baa586520",
+    "timestamp": 1771953229018,
+    "sessionId": "ac058a87-d792-4b75-9ebe-b7f1fdab90f2",
+    "tabId": 1,
+    "element": {
+      "tagName": "div",
+      "selectors": {
+        "css": ".journey-card",
+        "text": "Add To Cart on Checkout",
+        "ariaLabel": null,
+        "testId": null,
+        "testIdAttr": null
+      },
+      "inputType": null,
+      "value": null
+    }
+  },
+  {
+    "type": "click",
+    "url": "http://localhost:8000/",
+    "pageTitle": "Vigil \u2014 Journey Dashboard",
+    "id": "8cad7d42-12ce-4caa-b000-69ba82b033ef",
+    "timestamp": 1771953235018,
+    "sessionId": "ac058a87-d792-4b75-9ebe-b7f1fdab90f2",
+    "tabId": 1,
+    "element": {
+      "tagName": "button",
+      "selectors": {
+        "css": ".modal-close",
+        "text": "\u00d7",
+        "ariaLabel": null,
+        "testId": null,
+        "testIdAttr": null
+      },
+      "inputType": null,
+      "value": null
+    }
+  },
+  {
+    "type": "click",
+    "url": "http://localhost:8000/",
+    "pageTitle": "Vigil \u2014 Journey Dashboard",
+    "id": "dd0e768a-07be-4292-89ca-3bfeb346c039",
+    "timestamp": 1771953239018,
+    "sessionId": "ac058a87-d792-4b75-9ebe-b7f1fdab90f2",
+    "tabId": 1,
+    "element": {
+      "tagName": "option",
+      "selectors": {
+        "css": "#domain-filter option",
+        "text": "Authentication",
+        "ariaLabel": null,
+        "testId": null,
+        "testIdAttr": null
+      },
+      "inputType": null,
+      "value": null
+    }
+  },
+  {
+    "type": "pageload",
+    "url": "http://localhost:8000/",
+    "pageTitle": "Vigil \u2014 Journey Dashboard",
+    "id": "762e9b81-83e1-4301-ac82-2ff218ee451e",
+    "timestamp": 1771953319018,
+    "sessionId": "011e9674-056c-410f-87f5-f70bd7ea6d80",
+    "tabId": 1,
+    "navigation": {
+      "fromUrl": "",
+      "toUrl": "http://localhost:8000/",
+      "trigger": "pageload"
+    }
+  },
+  {
+    "type": "input",
+    "url": "http://localhost:8000/",
+    "pageTitle": "Vigil \u2014 Journey Dashboard",
+    "id": "ff1d8ffe-771f-4be5-a310-170f5c1b8288",
+    "timestamp": 1771953323018,
+    "sessionId": "011e9674-056c-410f-87f5-f70bd7ea6d80",
+    "tabId": 1,
+    "element": {
+      "tagName": "input",
+      "selectors": {
+        "css": "#chat-input",
+        "text": null,
+        "ariaLabel": null,
+        "testId": null,
+        "testIdAttr": null,
+        "name": null,
+        "placeholder": "Search journeys..."
+      },
+      "inputType": "text",
+      "value": "login"
+    }
+  },
+  {
+    "type": "click",
+    "url": "http://localhost:8000/",
+    "pageTitle": "Vigil \u2014 Journey Dashboard",
+    "id": "bd84b9e8-adf2-41da-9f3f-bd5f44c0f53a",
+    "timestamp": 1771953325018,
+    "sessionId": "011e9674-056c-410f-87f5-f70bd7ea6d80",
+    "tabId": 1,
+    "element": {
+      "tagName": "button",
+      "selectors": {
+        "css": "#chat-form button[type='submit']",
+        "text": "Ask",
+        "ariaLabel": null,
+        "testId": null,
+        "testIdAttr": null
+      },
+      "inputType": null,
+      "value": null
+    }
+  },
+  {
+    "type": "submit",
+    "url": "http://localhost:8000/",
+    "pageTitle": "Vigil \u2014 Journey Dashboard",
+    "id": "defac3ae-9574-4297-911f-13f2d5bcf61c",
+    "timestamp": 1771953325018,
+    "sessionId": "011e9674-056c-410f-87f5-f70bd7ea6d80",
+    "tabId": 1,
+    "element": {
+      "tagName": "form",
+      "selectors": {
+        "css": "#chat-form",
+        "text": null,
+        "ariaLabel": null,
+        "testId": null
+      },
+      "inputType": null,
+      "value": null
+    }
+  },
+  {
+    "type": "click",
+    "url": "http://localhost:8000/",
+    "pageTitle": "Vigil \u2014 Journey Dashboard",
+    "id": "cd1ef810-a65f-49a6-a04e-4863d347173f",
+    "timestamp": 1771953331018,
+    "sessionId": "011e9674-056c-410f-87f5-f70bd7ea6d80",
+    "tabId": 1,
+    "element": {
+      "tagName": "div",
+      "selectors": {
+        "css": ".journey-card",
+        "text": "Add To Cart on Login",
+        "ariaLabel": null,
+        "testId": null,
+        "testIdAttr": null
+      },
+      "inputType": null,
+      "value": null
+    }
+  },
+  {
+    "type": "click",
+    "url": "http://localhost:8000/",
+    "pageTitle": "Vigil \u2014 Journey Dashboard",
+    "id": "93700cd2-e80e-4967-8599-26dd00a37940",
+    "timestamp": 1771953337018,
+    "sessionId": "011e9674-056c-410f-87f5-f70bd7ea6d80",
+    "tabId": 1,
+    "element": {
+      "tagName": "button",
+      "selectors": {
+        "css": ".export-btn",
+        "text": "\u2193 Export Test",
+        "ariaLabel": null,
+        "testId": null,
+        "testIdAttr": null
+      },
+      "inputType": null,
+      "value": null
+    }
+  },
+  {
+    "type": "click",
+    "url": "http://localhost:8000/",
+    "pageTitle": "Vigil \u2014 Journey Dashboard",
+    "id": "1efba179-a48b-49d8-bab6-d52b3c8b1d89",
+    "timestamp": 1771953341018,
+    "sessionId": "011e9674-056c-410f-87f5-f70bd7ea6d80",
+    "tabId": 1,
+    "element": {
+      "tagName": "button",
+      "selectors": {
+        "css": ".modal-close",
+        "text": "\u00d7",
+        "ariaLabel": null,
+        "testId": null,
+        "testIdAttr": null
+      },
+      "inputType": null,
+      "value": null
+    }
+  }
+]

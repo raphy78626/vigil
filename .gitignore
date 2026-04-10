@@ -1,0 +1,45 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+dist/
+build/
+venv/
+.venv/
+backend/venv/
+.pytest_cache/
+
+# Node
+node_modules/
+extension/dist/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store
+.cursor/
+.claude/
+
+# Vigil data
+*.db
+*.sqlite
+*.sqlite3
+screenshots/
+dashboard_test_screenshots/
+
+# Auth & Secrets
+.env
+.env.*
+auth.json
+backend/auth.json
+*-auth.json
+~/.vigil/
+
+# Logs
+*.log
+
+# OS
+Thumbs.db

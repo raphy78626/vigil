@@ -1,0 +1,562 @@
+[
+  {
+    "id": "ce406d1a-e018-4bb1-81e0-a7d43536fe01",
+    "timestamp": 1774542474981,
+    "isoTime": "2026-03-26T21:57:54.981000",
+    "type": "pageload",
+    "url": "https://www.saucedemo.com/",
+    "pageTitle": "Swag Labs",
+    "tabId": 1,
+    "sessionId": "bcbf168a-3d2a-47b9-a9f4-bfe7d9ec2f47",
+    "element": null,
+    "navigation": {
+      "fromUrl": "",
+      "toUrl": "https://www.saucedemo.com/",
+      "trigger": "pageload"
+    }
+  },
+  {
+    "id": "4a85ab46-e77a-4a59-bf9d-dd1479b1289c",
+    "timestamp": 1774542479981,
+    "isoTime": "2026-03-26T21:57:59.981000",
+    "type": "click",
+    "url": "https://www.saucedemo.com/",
+    "pageTitle": "Swag Labs",
+    "tabId": 1,
+    "sessionId": "bcbf168a-3d2a-47b9-a9f4-bfe7d9ec2f47",
+    "element": {
+      "tagName": "input",
+      "selectors": {
+        "css": "#user-name",
+        "text": null,
+        "testId": "username",
+        "id": "user-name",
+        "name": "user-name",
+        "placeholder": "Username",
+        "ariaLabel": null,
+        "className": "input_error form_input"
+      },
+      "inputType": "text",
+      "value": null
+    },
+    "navigation": null
+  },
+  {
+    "id": "7705d171-2fc0-4cfa-810c-16fbb0927ffc",
+    "timestamp": 1774542484981,
+    "isoTime": "2026-03-26T21:58:04.981000",
+    "type": "input",
+    "url": "https://www.saucedemo.com/",
+    "pageTitle": "Swag Labs",
+    "tabId": 1,
+    "sessionId": "bcbf168a-3d2a-47b9-a9f4-bfe7d9ec2f47",
+    "element": {
+      "tagName": "input",
+      "selectors": {
+        "css": "#user-name",
+        "text": null,
+        "testId": "username",
+        "id": "user-name",
+        "name": "user-name",
+        "placeholder": "Username",
+        "ariaLabel": null,
+        "className": "input_error form_input"
+      },
+      "inputType": "text",
+      "value": "standard_user"
+    },
+    "navigation": null
+  },
+  {
+    "id": "92b34f9f-d3a7-4447-8a75-ed42c6f859b0",
+    "timestamp": 1774542489981,
+    "isoTime": "2026-03-26T21:58:09.981000",
+    "type": "click",
+    "url": "https://www.saucedemo.com/",
+    "pageTitle": "Swag Labs",
+    "tabId": 1,
+    "sessionId": "bcbf168a-3d2a-47b9-a9f4-bfe7d9ec2f47",
+    "element": {
+      "tagName": "input",
+      "selectors": {
+        "css": "#password",
+        "text": null,
+        "testId": "password",
+        "id": "password",
+        "name": "password",
+        "placeholder": "Password",
+        "ariaLabel": null,
+        "className": "input_error form_input"
+      },
+      "inputType": "password",
+      "value": null
+    },
+    "navigation": null
+  },
+  {
+    "id": "6c73bab1-8226-4a5f-8d0d-f79d2bd15a90",
+    "timestamp": 1774542492981,
+    "isoTime": "2026-03-26T21:58:12.981000",
+    "type": "input",
+    "url": "https://www.saucedemo.com/",
+    "pageTitle": "Swag Labs",
+    "tabId": 1,
+    "sessionId": "bcbf168a-3d2a-47b9-a9f4-bfe7d9ec2f47",
+    "element": {
+      "tagName": "input",
+      "selectors": {
+        "css": "#password",
+        "text": null,
+        "testId": "password",
+        "id": "password",
+        "name": "password",
+        "placeholder": "Password",
+        "ariaLabel": null,
+        "className": "input_error form_input"
+      },
+      "inputType": "password",
+      "value": "[REDACTED]"
+    },
+    "navigation": null
+  },
+  {
+    "id": "bb2b064e-bda0-4932-be28-bde43976fc4a",
+    "timestamp": 1774542496981,
+    "isoTime": "2026-03-26T21:58:16.981000",
+    "type": "click",
+    "url": "https://www.saucedemo.com/",
+    "pageTitle": "Swag Labs",
+    "tabId": 1,
+    "sessionId": "bcbf168a-3d2a-47b9-a9f4-bfe7d9ec2f47",
+    "element": {
+      "tagName": "input",
+      "selectors": {
+        "css": "#login-button",
+        "text": "Login",
+        "testId": "login-button",
+        "id": "login-button",
+        "name": "login-button",
+        "placeholder": null,
+        "ariaLabel": null,
+        "className": "submit-button btn_action"
+      },
+      "inputType": "submit",
+      "value": "Login"
+    },
+    "navigation": null
+  },
+  {
+    "id": "54fb935f-49ae-4c91-ac27-1ec292b51df2",
+    "timestamp": 1774542499981,
+    "isoTime": "2026-03-26T21:58:19.981000",
+    "type": "navigation",
+    "url": "https://www.saucedemo.com/inventory.html",
+    "pageTitle": "Swag Labs",
+    "tabId": 1,
+    "sessionId": "bcbf168a-3d2a-47b9-a9f4-bfe7d9ec2f47",
+    "element": null,
+    "navigation": {
+      "fromUrl": "https://www.saucedemo.com/",
+      "toUrl": "https://www.saucedemo.com/inventory.html",
+      "trigger": "spa"
+    }
+  },
+  {
+    "id": "9922235b-acef-4f05-aeb2-0f41ac9997d6",
+    "timestamp": 1774542500981,
+    "isoTime": "2026-03-26T21:58:20.981000",
+    "type": "pageload",
+    "url": "https://www.saucedemo.com/inventory.html",
+    "pageTitle": "Swag Labs",
+    "tabId": 1,
+    "sessionId": "bcbf168a-3d2a-47b9-a9f4-bfe7d9ec2f47",
+    "element": null,
+    "navigation": {
+      "fromUrl": "https://www.saucedemo.com/",
+      "toUrl": "https://www.saucedemo.com/inventory.html",
+      "trigger": "pageload"
+    }
+  },
+  {
+    "id": "cd7477a5-8c5a-4efc-9804-066d1a5502ef",
+    "timestamp": 1774542534981,
+    "isoTime": "2026-03-26T21:58:54.981000",
+    "type": "click",
+    "url": "https://www.saucedemo.com/inventory.html",
+    "pageTitle": "Swag Labs",
+    "tabId": 1,
+    "sessionId": "bcbf168a-3d2a-47b9-a9f4-bfe7d9ec2f47",
+    "element": {
+      "tagName": "div",
+      "selectors": {
+        "css": ".inventory_item:nth-child(1) .inventory_item_name",
+        "text": "Sauce Labs Backpack",
+        "testId": "inventory-item-name",
+        "id": null,
+        "name": null,
+        "placeholder": null,
+        "ariaLabel": null,
+        "className": "inventory_item_name"
+      },
+      "inputType": null,
+      "value": null
+    },
+    "navigation": null
+  },
+  {
+    "id": "977205d4-c582-44bc-8b6b-783eab30bc03",
+    "timestamp": 1774542537981,
+    "isoTime": "2026-03-26T21:58:57.981000",
+    "type": "pageload",
+    "url": "https://www.saucedemo.com/inventory-item.html?id=4",
+    "pageTitle": "Swag Labs",
+    "tabId": 1,
+    "sessionId": "bcbf168a-3d2a-47b9-a9f4-bfe7d9ec2f47",
+    "element": null,
+    "navigation": {
+      "fromUrl": "https://www.saucedemo.com/inventory.html",
+      "toUrl": "https://www.saucedemo.com/inventory-item.html?id=4",
+      "trigger": "pageload"
+    }
+  },
+  {
+    "id": "abb89264-d015-4550-8a3f-2bae839a2907",
+    "timestamp": 1774542544981,
+    "isoTime": "2026-03-26T21:59:04.981000",
+    "type": "click",
+    "url": "https://www.saucedemo.com/inventory-item.html?id=4",
+    "pageTitle": "Swag Labs",
+    "tabId": 1,
+    "sessionId": "bcbf168a-3d2a-47b9-a9f4-bfe7d9ec2f47",
+    "element": {
+      "tagName": "button",
+      "selectors": {
+        "css": "#add-to-cart",
+        "text": "Add to cart",
+        "testId": "add-to-cart",
+        "id": "add-to-cart",
+        "name": null,
+        "placeholder": null,
+        "ariaLabel": null,
+        "className": "btn btn_primary btn_small btn_inventory"
+      },
+      "inputType": null,
+      "value": null
+    },
+    "navigation": null
+  },
+  {
+    "id": "f92b8a91-0377-4ade-92f4-d8da2bd469e8",
+    "timestamp": 1774542549981,
+    "isoTime": "2026-03-26T21:59:09.981000",
+    "type": "click",
+    "url": "https://www.saucedemo.com/inventory-item.html?id=4",
+    "pageTitle": "Swag Labs",
+    "tabId": 1,
+    "sessionId": "bcbf168a-3d2a-47b9-a9f4-bfe7d9ec2f47",
+    "element": {
+      "tagName": "button",
+      "selectors": {
+        "css": "#back-to-products",
+        "text": "Back to products",
+        "testId": "back-to-products",
+        "id": "back-to-products",
+        "name": null,
+        "placeholder": null,
+        "ariaLabel": null,
+        "className": "inventory_details_back_button"
+      },
+      "inputType": null,
+      "value": null
+    },
+    "navigation": null
+  },
+  {
+    "id": "5d6a9cb1-5f5b-48ac-8133-dc633af47263",
+    "timestamp": 1774542551981,
+    "isoTime": "2026-03-26T21:59:11.981000",
+    "type": "navigation",
+    "url": "https://www.saucedemo.com/inventory.html",
+    "pageTitle": "Swag Labs",
+    "tabId": 1,
+    "sessionId": "bcbf168a-3d2a-47b9-a9f4-bfe7d9ec2f47",
+    "element": null,
+    "navigation": {
+      "fromUrl": "https://www.saucedemo.com/inventory-item.html?id=4",
+      "toUrl": "https://www.saucedemo.com/inventory.html",
+      "trigger": "spa"
+    }
+  },
+  {
+    "id": "b867a47b-c35a-4970-b7a0-30ef825be1c9",
+    "timestamp": 1774542564981,
+    "isoTime": "2026-03-26T21:59:24.981000",
+    "type": "click",
+    "url": "https://www.saucedemo.com/inventory.html",
+    "pageTitle": "Swag Labs",
+    "tabId": 1,
+    "sessionId": "bcbf168a-3d2a-47b9-a9f4-bfe7d9ec2f47",
+    "element": {
+      "tagName": "button",
+      "selectors": {
+        "css": "#add-to-cart-sauce-labs-bike-light",
+        "text": "Add to cart",
+        "testId": "add-to-cart-sauce-labs-bike-light",
+        "id": "add-to-cart-sauce-labs-bike-light",
+        "name": null,
+        "placeholder": null,
+        "ariaLabel": null,
+        "className": "btn btn_primary btn_small btn_inventory"
+      },
+      "inputType": null,
+      "value": null
+    },
+    "navigation": null
+  },
+  {
+    "id": "6424db4f-7e87-4384-96d8-0776ef901536",
+    "timestamp": 1774542594981,
+    "isoTime": "2026-03-26T21:59:54.981000",
+    "type": "click",
+    "url": "https://www.saucedemo.com/inventory.html",
+    "pageTitle": "Swag Labs",
+    "tabId": 1,
+    "sessionId": "bcbf168a-3d2a-47b9-a9f4-bfe7d9ec2f47",
+    "element": {
+      "tagName": "a",
+      "selectors": {
+        "css": ".shopping_cart_link",
+        "text": "2",
+        "testId": "shopping-cart-link",
+        "id": null,
+        "name": null,
+        "placeholder": null,
+        "ariaLabel": null,
+        "className": "shopping_cart_link"
+      },
+      "inputType": null,
+      "value": null
+    },
+    "navigation": null
+  },
+  {
+    "id": "3c61cbd8-39e1-456c-8000-f0da562b7631",
+    "timestamp": 1774542596981,
+    "isoTime": "2026-03-26T21:59:56.981000",
+    "type": "pageload",
+    "url": "https://www.saucedemo.com/cart.html",
+    "pageTitle": "Swag Labs",
+    "tabId": 1,
+    "sessionId": "bcbf168a-3d2a-47b9-a9f4-bfe7d9ec2f47",
+    "element": null,
+    "navigation": {
+      "fromUrl": "https://www.saucedemo.com/inventory.html",
+      "toUrl": "https://www.saucedemo.com/cart.html",
+      "trigger": "pageload"
+    }
+  },
+  {
+    "id": "1e5483b5-ae70-4ff9-ad81-27ecb3de73f0",
+    "timestamp": 1774542604981,
+    "isoTime": "2026-03-26T22:00:04.981000",
+    "type": "click",
+    "url": "https://www.saucedemo.com/cart.html",
+    "pageTitle": "Swag Labs",
+    "tabId": 1,
+    "sessionId": "bcbf168a-3d2a-47b9-a9f4-bfe7d9ec2f47",
+    "element": {
+      "tagName": "button",
+      "selectors": {
+        "css": "#checkout",
+        "text": "Checkout",
+        "testId": "checkout",
+        "id": "checkout",
+        "name": null,
+        "placeholder": null,
+        "ariaLabel": null,
+        "className": "submit-button btn_action"
+      },
+      "inputType": null,
+      "value": null
+    },
+    "navigation": null
+  },
+  {
+    "id": "735579f2-25d4-4a9f-9255-6d493d2e26f1",
+    "timestamp": 1774542606981,
+    "isoTime": "2026-03-26T22:00:06.981000",
+    "type": "pageload",
+    "url": "https://www.saucedemo.com/checkout-step-one.html",
+    "pageTitle": "Swag Labs",
+    "tabId": 1,
+    "sessionId": "bcbf168a-3d2a-47b9-a9f4-bfe7d9ec2f47",
+    "element": null,
+    "navigation": {
+      "fromUrl": "https://www.saucedemo.com/cart.html",
+      "toUrl": "https://www.saucedemo.com/checkout-step-one.html",
+      "trigger": "pageload"
+    }
+  },
+  {
+    "id": "f9d1db10-e60d-4429-8f32-adcea2e0daba",
+    "timestamp": 1774542612981,
+    "isoTime": "2026-03-26T22:00:12.981000",
+    "type": "input",
+    "url": "https://www.saucedemo.com/checkout-step-one.html",
+    "pageTitle": "Swag Labs",
+    "tabId": 1,
+    "sessionId": "bcbf168a-3d2a-47b9-a9f4-bfe7d9ec2f47",
+    "element": {
+      "tagName": "input",
+      "selectors": {
+        "css": "#first-name",
+        "text": null,
+        "testId": "firstName",
+        "id": "first-name",
+        "name": null,
+        "placeholder": "First Name",
+        "ariaLabel": null,
+        "className": "input_error form_input"
+      },
+      "inputType": "text",
+      "value": "Test"
+    },
+    "navigation": null
+  },
+  {
+    "id": "4b0b0884-ae16-49b5-aab9-73d16f5780c8",
+    "timestamp": 1774542616981,
+    "isoTime": "2026-03-26T22:00:16.981000",
+    "type": "input",
+    "url": "https://www.saucedemo.com/checkout-step-one.html",
+    "pageTitle": "Swag Labs",
+    "tabId": 1,
+    "sessionId": "bcbf168a-3d2a-47b9-a9f4-bfe7d9ec2f47",
+    "element": {
+      "tagName": "input",
+      "selectors": {
+        "css": "#last-name",
+        "text": null,
+        "testId": "lastName",
+        "id": "last-name",
+        "name": null,
+        "placeholder": "Last Name",
+        "ariaLabel": null,
+        "className": "input_error form_input"
+      },
+      "inputType": "text",
+      "value": "User"
+    },
+    "navigation": null
+  },
+  {
+    "id": "ffa5d9e2-dcaf-459b-8769-b65f43aeba44",
+    "timestamp": 1774542620981,
+    "isoTime": "2026-03-26T22:00:20.981000",
+    "type": "input",
+    "url": "https://www.saucedemo.com/checkout-step-one.html",
+    "pageTitle": "Swag Labs",
+    "tabId": 1,
+    "sessionId": "bcbf168a-3d2a-47b9-a9f4-bfe7d9ec2f47",
+    "element": {
+      "tagName": "input",
+      "selectors": {
+        "css": "#postal-code",
+        "text": null,
+        "testId": "postalCode",
+        "id": "postal-code",
+        "name": null,
+        "placeholder": "Zip/Postal Code",
+        "ariaLabel": null,
+        "className": "input_error form_input"
+      },
+      "inputType": "text",
+      "value": "12345"
+    },
+    "navigation": null
+  },
+  {
+    "id": "3a15fe5a-9ab3-46c8-8b61-3ef07f4d04d3",
+    "timestamp": 1774542624981,
+    "isoTime": "2026-03-26T22:00:24.981000",
+    "type": "click",
+    "url": "https://www.saucedemo.com/checkout-step-one.html",
+    "pageTitle": "Swag Labs",
+    "tabId": 1,
+    "sessionId": "bcbf168a-3d2a-47b9-a9f4-bfe7d9ec2f47",
+    "element": {
+      "tagName": "input",
+      "selectors": {
+        "css": "#continue",
+        "text": "Continue",
+        "testId": "continue",
+        "id": "continue",
+        "name": null,
+        "placeholder": null,
+        "ariaLabel": null,
+        "className": "submit-button btn_action"
+      },
+      "inputType": "submit",
+      "value": "Continue"
+    },
+    "navigation": null
+  },
+  {
+    "id": "dfd5d3a4-b0eb-4dba-b033-bc6588c3f36a",
+    "timestamp": 1774542626981,
+    "isoTime": "2026-03-26T22:00:26.981000",
+    "type": "pageload",
+    "url": "https://www.saucedemo.com/checkout-step-two.html",
+    "pageTitle": "Swag Labs",
+    "tabId": 1,
+    "sessionId": "bcbf168a-3d2a-47b9-a9f4-bfe7d9ec2f47",
+    "element": null,
+    "navigation": {
+      "fromUrl": "https://www.saucedemo.com/checkout-step-one.html",
+      "toUrl": "https://www.saucedemo.com/checkout-step-two.html",
+      "trigger": "pageload"
+    }
+  },
+  {
+    "id": "d1d9aa2b-661d-44e0-9791-4993db6ff34d",
+    "timestamp": 1774542634981,
+    "isoTime": "2026-03-26T22:00:34.981000",
+    "type": "click",
+    "url": "https://www.saucedemo.com/checkout-step-two.html",
+    "pageTitle": "Swag Labs",
+    "tabId": 1,
+    "sessionId": "bcbf168a-3d2a-47b9-a9f4-bfe7d9ec2f47",
+    "element": {
+      "tagName": "button",
+      "selectors": {
+        "css": "#finish",
+        "text": "Finish",
+        "testId": "finish",
+        "id": "finish",
+        "name": null,
+        "placeholder": null,
+        "ariaLabel": null,
+        "className": "submit-button btn_action"
+      },
+      "inputType": null,
+      "value": null
+    },
+    "navigation": null
+  },
+  {
+    "id": "ba5c9bc7-930c-4049-8da7-28593668037d",
+    "timestamp": 1774542636981,
+    "isoTime": "2026-03-26T22:00:36.981000",
+    "type": "pageload",
+    "url": "https://www.saucedemo.com/checkout-complete.html",
+    "pageTitle": "Swag Labs",
+    "tabId": 1,
+    "sessionId": "bcbf168a-3d2a-47b9-a9f4-bfe7d9ec2f47",
+    "element": null,
+    "navigation": {
+      "fromUrl": "https://www.saucedemo.com/checkout-step-two.html",
+      "toUrl": "https://www.saucedemo.com/checkout-complete.html",
+      "trigger": "pageload"
+    }
+  }
+]

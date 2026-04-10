@@ -1,0 +1,27 @@
+{
+  "manifest_version": 3,
+  "name": "Vigil",
+  "version": "1.0.0",
+  "description": "AI QA automation — captures exploratory testing into semantic journeys with rich selector metadata",
+  "permissions": [
+    "activeTab",
+    "debugger",
+    "storage",
+    "tabs"
+  ],
+  "host_permissions": ["<all_urls>"],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content.js"],
+      "run_at": "document_idle",
+      "all_frames": false
+    }
+  ],
+  "action": {
+    "default_popup": "popup.html"
+  }
+}

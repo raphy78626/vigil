@@ -1,0 +1,14 @@
+{
+  "name": "vigil-extension",
+  "version": "0.1.0",
+  "description": "Vigil Chrome Extension — Passive QA Capture Agent",
+  "scripts": {
+    "build": "tsc && cp src/popup.html dist/ && cp -r icons dist/",
+    "watch": "tsc --watch",
+    "clean": "rm -rf dist"
+  },
+  "devDependencies": {
+    "typescript": "^5.4.0",
+    "@types/chrome": "^0.0.268"
+  }
+}
