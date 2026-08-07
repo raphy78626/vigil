@@ -104,6 +104,13 @@ graph TB
     Replay -.-> LLM
 ```
 
+**Key design decisions:**
+
+- **Capture before author** — tests come from real user journeys, not invented coverage. Trade-off: needs real traffic; wins on relevance.
+- **Self-healing cascade (6 strategies)** — CSS → XPath → ARIA → text → testId → LLM repair. Fail closed only after the cascade; don't page humans on every UI tweak.
+- **PII redacted at capture** — privacy is a boundary, not a later filter. Local-first by default; nothing leaves the machine unless you opt in.
+- **Pluggable LLMs** — OpenAI / Gemini / Ollama. Clustering and heal steps can use cheap local models; expensive models only for repair.
+
 ### The Pipeline
 
 1. **Capture** — Chrome extension records clicks, navigations, form fills, and scrolls with full element context (CSS, XPath, ARIA, text, testId selectors)
