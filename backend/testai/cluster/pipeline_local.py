@@ -214,7 +214,9 @@ def generate_journey_name(domain: str, feature: str, events: List[Event]) -> str
         return f"Navigate {domain}"
     if has_nav:
         return f"Browse {feature}"
-        return f"Explore {feature}"
+    if n_clicks >= 1:
+        return f"Interact with {feature}"
+    return f"Explore {feature}"
 
 
 _SKIP_EVENT_TYPES = {
