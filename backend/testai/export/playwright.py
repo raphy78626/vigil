@@ -1126,8 +1126,10 @@ def _build_conftest(default_origin: str) -> str:
         '# ---------------------------------------------------------------------------',
         '',
         '@pytest.fixture(scope="session")',
-        'def base_url():',
-        f'    return os.environ.get("BASE_URL", "{default_origin}")',
+        'def base_url(request):',
+        '    # --base-url CLI flag takes priority; $BASE_URL env is the fallback.',
+        f'    cli = request.config.getoption("--base-url", default=None)',
+        f'    return cli or os.environ.get("BASE_URL", "{default_origin}")',
         '',
         '',
         '@pytest.fixture(scope="session")',
@@ -1552,6 +1554,10 @@ def _render(journey: Journey) -> str:
     lines.append('    if _skipped:')
     lines.append('        print(f"  Skipped steps: {_skipped}", flush=True)')
     lines.append('    print(f"__SOFT_RESULTS__:passed={_passed},failed={len(_failed)},skipped={len(_skipped)}", flush=True)')
+    lines.append('    # Hard-fail when majority of steps failed — soft-fail must not mask a broken run.')
+    lines.append('    _actionable = _total - len(_skipped)')
+    lines.append('    if _actionable > 0 and len(_failed) / _actionable > 0.5:')
+    lines.append('        pytest.fail(f"Journey failed: {len(_failed)}/{_actionable} actionable steps failed — {_failed}")')
     lines.append("")
     lines.append("    # Emit step timings for replay route to parse")
     lines.append("    for _sn, _ms in _step_timings.items():")

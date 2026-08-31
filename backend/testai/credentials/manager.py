@@ -14,28 +14,55 @@ import base64
 import hashlib
 import json
 import os
+import secrets
+import stat
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Dict, List, Optional
 
+from cryptography.fernet import Fernet
+
 _VAULT_DIR = Path.home() / ".vigil" / "credentials"
+_KEY_FILE = Path.home() / ".vigil" / "vault.key"
 _KEY_ENV = "VIGIL_VAULT_KEY"
 
 
-def _derive_key(passphrase: str) -> bytes:
-    return hashlib.pbkdf2_hmac("sha256", passphrase.encode(), b"vigil-vault-salt-2026", 100_000)
+def _derive_fernet_key(passphrase: str) -> bytes:
+    raw = hashlib.pbkdf2_hmac("sha256", passphrase.encode(), b"vigil-vault-salt-2026", 100_000)
+    return base64.urlsafe_b64encode(raw)
 
 
-def _xor_crypt(data: bytes, key: bytes) -> bytes:
-    """Simple XOR obfuscation. Not meant for production secrets management
-    but sufficient for local dev credential storage."""
+def _load_or_create_key() -> bytes:
+    """Return a Fernet key from env, key file, or generate and persist a new one."""
+    env_val = os.environ.get(_KEY_ENV, "")
+    if env_val:
+        return _derive_fernet_key(env_val)
+
+    _KEY_FILE.parent.mkdir(parents=True, exist_ok=True)
+    if _KEY_FILE.exists():
+        return _derive_fernet_key(_KEY_FILE.read_text().strip())
+
+    passphrase = secrets.token_hex(32)
+    _KEY_FILE.write_text(passphrase)
+    _KEY_FILE.chmod(stat.S_IRUSR | stat.S_IWUSR)  # 0600 — owner only
+    return _derive_fernet_key(passphrase)
+
+
+def _xor_decrypt_legacy(data: bytes, key: bytes) -> bytes:
+    """Decrypt data written by the old XOR implementation — migration only."""
     return bytes(d ^ key[i % len(key)] for i, d in enumerate(data))
 
 
+def _legacy_key() -> bytes:
+    passphrase = os.environ.get(_KEY_ENV, "vigil-default-key")
+    return hashlib.pbkdf2_hmac("sha256", passphrase.encode(), b"vigil-vault-salt-2026", 100_000)
+
+
 class CredentialManager:
-    def __init__(self):
-        _VAULT_DIR.mkdir(parents=True, exist_ok=True)
-        self._key = _derive_key(os.environ.get(_KEY_ENV, "vigil-default-key"))
+    def __init__(self, vault_dir: Optional[Path] = None):
+        self._vault_dir = vault_dir or _VAULT_DIR
+        self._vault_dir.mkdir(parents=True, exist_ok=True)
+        self._fernet = Fernet(_load_or_create_key())
 
     def save_credential(self, domain: str, username: str, password: str,
                         role: str = "standard", label: str = "") -> Dict:
@@ -72,7 +99,7 @@ class CredentialManager:
     def list_domains(self) -> List[Dict]:
         """List all domains with stored credentials."""
         domains = []
-        for f in _VAULT_DIR.glob("*.vault"):
+        for f in self._vault_dir.glob("*.vault"):
             domain = f.stem.replace("_", ".")
             creds = self._load_domain(domain)
             domains.append({
@@ -118,24 +145,34 @@ class CredentialManager:
 
     def _domain_filename(self, domain: str) -> Path:
         safe = domain.replace(".", "_").replace(":", "_").replace("/", "_")
-        return _VAULT_DIR / f"{safe}.vault"
+        return self._vault_dir / f"{safe}.vault"
 
     def _load_domain(self, domain: str) -> List[Dict]:
         path = self._domain_filename(domain)
         if not path.exists():
             return []
         try:
-            encrypted = base64.b64decode(path.read_text())
-            decrypted = _xor_crypt(encrypted, self._key)
-            return json.loads(decrypted.decode())
+            raw = path.read_bytes()
+            try:
+                envelope = json.loads(raw)
+                if isinstance(envelope, dict) and envelope.get("v") == 2:
+                    plaintext = self._fernet.decrypt(envelope["data"].encode())
+                    return json.loads(plaintext.decode())
+            except (json.JSONDecodeError, KeyError):
+                pass
+            # Legacy XOR format — decrypt and immediately re-save as v2
+            encrypted = base64.b64decode(raw)
+            decrypted = _xor_decrypt_legacy(encrypted, _legacy_key())
+            creds = json.loads(decrypted.decode())
+            self._save_domain(domain, creds)  # migrate in place
+            return creds
         except Exception:
             return []
 
     def _save_domain(self, domain: str, creds: List[Dict]):
         path = self._domain_filename(domain)
-        data = json.dumps(creds).encode()
-        encrypted = _xor_crypt(data, self._key)
-        path.write_text(base64.b64encode(encrypted).decode())
+        token = self._fernet.encrypt(json.dumps(creds).encode()).decode()
+        path.write_text(json.dumps({"v": 2, "data": token}))
 
     def _sanitize(self, cred: Dict) -> Dict:
         return {

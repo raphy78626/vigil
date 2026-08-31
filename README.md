@@ -16,6 +16,12 @@
 
 ---
 
+## Project Status
+
+**Early-stage open source** — core pipeline works (capture → cluster → Playwright export → self-healing replay), validated against 4 demo apps. Not production-hardened. No external pilot users yet. Actively seeking feedback from QA engineers and SDETs — see [Contributing](#contributing).
+
+---
+
 ## What Is Vigil?
 
 Vigil passively captures real user behavior through a Chrome extension, clusters interactions into meaningful journeys using AI, and generates self-healing Playwright tests that adapt when UI changes.
@@ -150,6 +156,7 @@ Vigil is **local-first by design**:
 - PII redacted at capture time (emails, phones, cards, passwords → `[REDACTED]`)
 - LLM calls send event summaries only — no raw data or screenshots
 - Domain allowlist — only approved sites are captured
+- Credential vault encrypted with Fernet (AES-128-CBC + HMAC); key sourced from `VIGIL_VAULT_KEY` env or auto-generated at `~/.vigil/vault.key` (0600 permissions)
 - No telemetry, no analytics, no phone-home
 - Delete all data anytime via extension settings
 
