@@ -18,7 +18,9 @@
 
 ## Project Status
 
-**Early-stage open source** — core pipeline works (capture → cluster → Playwright export → self-healing replay), validated against 4 demo apps. Not production-hardened. No external pilot users yet. Actively seeking feedback from QA engineers and SDETs — see [Contributing](#contributing).
+**Early-stage open source** — core pipeline works (capture → cluster → Playwright export → self-healing replay), validated against demo apps and real production sites (GitHub, Wikipedia, Hacker News). Not production-hardened. No external pilot users yet. Actively seeking feedback from QA engineers and SDETs — see [Contributing](#contributing).
+
+> **Real-site validation (Aug 2026):** 6/6 journeys PASSED on GitHub, Wikipedia, and Hacker News. Wikipedia search triggered the self-healing cascade live — CSS selector failed, ARIA fallback recovered. See [how the cascade works](#self-healing-cascade).
 
 ---
 
@@ -81,49 +83,59 @@ python -m testai demo-showcase         # Rich showcase (3 apps, 12 journeys)
 
 ## How It Works
 
+### The problem Vigil solves
+
+Every time your UI changes, your E2E tests break. Someone has to find the broken selector, fix it, and push a patch. At scale this becomes a full-time job — or teams just stop maintaining tests.
+
 ```mermaid
-graph TB
-    subgraph capture ["1. CAPTURE"]
-        Ext["Chrome Extension"]
-        Events["Event Stream<br/>clicks / navigation / forms"]
-    end
-
-    subgraph understand ["2. UNDERSTAND"]
-        Cluster["Journey Clustering"]
-        HITL["Human-in-the-Loop<br/>Review Queue"]
-    end
-
-    subgraph serve ["3. SERVE"]
-        Replay["Playwright Replay<br/>+ Self-Healing"]
-        Export["Export<br/>Playwright / Cypress / Selenium"]
-        CI["CI/CD<br/>GitHub Actions"]
-    end
-
-    subgraph ai ["AI Layer"]
-        LLM["LLM Provider<br/>OpenAI / Claude / Gemini / Ollama"]
-    end
-
-    Ext --> Events --> Cluster
-    Cluster --> HITL --> Replay
-    Replay --> Export --> CI
-    Cluster -.-> LLM
-    Replay -.-> LLM
+graph LR
+    A["🧑‍💻 Engineer changes a button label"] --> B["❌ 12 tests fail\n on CI"]
+    B --> C["😩 Someone spends\n half a day fixing selectors"]
+    C --> D["🔁 Repeat next sprint"]
 ```
 
-**Key design decisions:**
+### What Vigil does instead
 
-- **Capture before author** — tests come from real user journeys, not invented coverage. Trade-off: needs real traffic; wins on relevance.
-- **Self-healing cascade (6 strategies)** — CSS → XPath → ARIA → text → testId → LLM repair. Fail closed only after the cascade; don't page humans on every UI tweak.
-- **PII redacted at capture** — privacy is a boundary, not a later filter. Local-first by default; nothing leaves the machine unless you opt in.
-- **Pluggable LLMs** — OpenAI / Gemini / Ollama. Clustering and heal steps can use cheap local models; expensive models only for repair.
+```mermaid
+graph LR
+    A["🧑 Your team uses\n the app normally"] -->|Chrome extension\ncaptures every click| B["📋 Vigil discovers\n user journeys"]
+    B -->|AI clusters &\n names them| C["🧪 Runnable tests\n generated automatically"]
+    C -->|UI changes?| D["🔧 Self-healing engine\n fixes broken selectors"]
+    D -->|Test passes| E["✅ CI stays green\n No human needed"]
+```
 
-### The Pipeline
+**The core trade-offs:**
+- Needs real usage to capture from (works best on apps people actually use daily)
+- Self-healing is best-effort — LLM repair is the last resort, not the first
+- Local-first: all data stays on your machine, PII redacted before storage
 
-1. **Capture** — Chrome extension records clicks, navigations, form fills, and scrolls with full element context (CSS, XPath, ARIA, text, testId selectors)
-2. **Cluster** — AI segments raw events into sessions, groups coherent action flows, and labels each journey with a human-readable name and confidence score
-3. **Review** — Auto-discovered journeys enter a Human-in-the-Loop queue. High-confidence journeys are auto-approved; borderline ones await human review
-4. **Replay** — Journeys are replayed as Playwright tests. When selectors break, the self-healing engine cascades through 6 strategies including LLM-powered repair
-5. **Export** — Generate runnable test files for Playwright, Cypress, or Selenium. One-click GitHub Actions CI/CD workflow export
+---
+
+## Self-Healing Cascade
+
+When a selector fails at replay time, Vigil doesn't stop — it tries 8 strategies in order before calling it a failure:
+
+```
+1. CSS selector          → exact match from capture
+2. XPath                 → structural fallback
+3. ARIA role + label     → get_by_role("button", name="Submit")
+4. Visible text          → get_by_text("Submit")
+5. Placeholder text      → get_by_placeholder("Search...")
+6. test-id attributes    → data-testid, data-cy, data-qa (7 variants)
+7. nth-of-type           → positional last resort
+8. LLM repair            → send failure screenshot + test source → get back a patched function
+```
+
+**Real example:** Wikipedia search input (Aug 2026 run)
+
+```
+[step 2] fill: #searchInput → TimeoutError (element not found)
+[heal]   try XPath: //input[@type="search"] → not found
+[heal]   try ARIA: get_by_role("searchbox") → FOUND
+[healed] filled focused element with "Large language model"
+```
+
+The test continues. No human intervention. The healed selector is logged but not written back — the next run tries CSS first again, so a one-time DOM quirk doesn't permanently degrade the test.
 
 ---
 

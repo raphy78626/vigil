@@ -144,6 +144,9 @@ The platform is **pilot-ready** with 98 API endpoints and 19 features validated 
 - [x] The Internet Herokuapp (forms: login, logout) — 7 steps
 - [x] TodoMVC (SPA: add, toggle, filter todos) — 11 steps
 - [x] Vigil Dashboard (self-test: chat, browse, export) — 14 steps
+- [x] **GitHub** (search, repo nav) — 6 steps, 2 journeys, 100% pass (Aug 2026)
+- [x] **Wikipedia** (article browse, search fill with self-healing) — 5 steps, 2 journeys, 100% pass (Aug 2026)
+- [x] **Hacker News** (frontpage, Ask HN) — 4 steps, 2 journeys, 100% pass (Aug 2026)
 
 ---
 
