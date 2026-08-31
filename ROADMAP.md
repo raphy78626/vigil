@@ -23,7 +23,7 @@ The platform is **pilot-ready** with 98 API endpoints and 19 features validated 
 - [x] JSON export for ingestion
 - [x] Backend URL config + one-click flush to API
 - [x] 30-min idle session rotation
-- [x] `all_frames: true` for iframe capture
+- [ ] `all_frames: true` for iframe capture (manifest currently sets `false`; iframes not captured)
 - [x] History API interception (`pushState`/`replaceState`) for SPA navigation
 
 ### Semantic Clustering Engine
@@ -103,11 +103,11 @@ The platform is **pilot-ready** with 98 API endpoints and 19 features validated 
 - [x] Learned domain/feature vocabulary endpoint
 - [x] Foundation for future clustering model fine-tuning
 
-### Real-Time Event Ingestion (NEW)
-- [x] WebSocket endpoint (`ws://localhost:8000/ws/events`)
+### Real-Time Event Ingestion (PARTIAL)
+- [x] WebSocket endpoint (`ws://localhost:8000/ws/events`) — backend only
 - [x] Per-session event buffering
 - [x] Auto-clustering on flush command or disconnect
-- [x] Replaces batch JSON upload friction
+- [ ] Extension WebSocket client — not implemented; extension uses HTTP flush only
 
 ### Auto-Healing (2-Level)
 - [x] 8-strategy runtime self-healing locator chain
@@ -196,10 +196,10 @@ All 9 pilot-blocking items shipped.
 - [x] One-click flush to backend API (done in v1.0)
 - [x] iFrame support via `all_frames: true` (done in v1.0)
 - [x] Session rotation on idle (30 min, done in v1.0)
-- [x] Real-time event streaming (WebSocket to local backend) — **Done**
+- [ ] Real-time event streaming (WebSocket to local backend) — backend endpoint exists; extension client not yet implemented
 - [x] Smart noise filtering (ML-weighted scoring, 25+ noise domains) — **Done v0.3**
 - [x] Scroll, hover, drag-and-drop capture (9 event types) — **Done v0.3**
-- [x] Shadow DOM support (cross-framework piercing) — **Done v0.3**
+- [ ] Shadow DOM support — backend parser exists; extension captures via `event.target` only, not `composedPath()`, so shadow roots are not traversed
 - [ ] Multi-tab session tracking
 - [ ] Session tagging ("I'm testing checkout now")
 
