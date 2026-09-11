@@ -11,8 +11,9 @@ from typing import Dict, List, Optional
 from testai.models.event import Event, EventType, ElementContext, ElementSelectors, NavigationContext, KeyEventContext
 from testai.cluster.segmenter import SessionSegmenter
 from testai.cluster.grouper import FlowGrouper
-from testai.cluster.labeler import JourneyLabeler
-from testai.cluster.hierarchy import HierarchyBuilder
+# JourneyLabeler and HierarchyBuilder imported lazily inside run_pipeline()
+# so parse_raw_event() is importable without litellm installed (used by the
+# offline pipeline).
 from testai.hitl.review import ReviewManager
 from testai.hitl.learner import LabelLearner
 from testai.storage.db import Database
@@ -152,6 +153,7 @@ def run_pipeline(
         print(f"\n[4/6] Labeling flows with LLM ({model})...")
         if vocabulary_hints:
             print("       Using learned vocabulary hints from past corrections")
+    from testai.cluster.labeler import JourneyLabeler  # lazy: needs litellm
     labeler = JourneyLabeler(model=model)
     journeys = []
     for i, flow in enumerate(all_flows):
