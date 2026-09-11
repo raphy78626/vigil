@@ -5,7 +5,6 @@
   "description": "AI QA automation — captures exploratory testing into semantic journeys with rich selector metadata",
   "permissions": [
     "activeTab",
-    "debugger",
     "storage",
     "tabs"
   ],

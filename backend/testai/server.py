@@ -17,6 +17,7 @@ from testai.routes import (
     auth_routes, settings, misc, export, explorer,
     explore_mutations, audit, helpers,
 )
+from testai.team.auth import require_auth
 
 app = FastAPI(
     title="TestAI-Pro",
@@ -25,6 +26,23 @@ app = FastAPI(
     docs_url="/docs",
     redoc_url="/redoc",
 )
+
+
+@app.on_event("startup")
+async def _startup() -> None:
+    """Create the first admin account on first run (deferred from import time)."""
+    try:
+        generated_password = state.team_auth.ensure_admin_exists()
+        if generated_password:
+            print(
+                f"\n  ⚠️  First run: admin account created.\n"
+                f"  Username: admin\n"
+                f"  Password: {generated_password}\n"
+                f"  (saved to ~/.vigil/admin.passwd — change it after first login)\n"
+            )
+    except Exception as _e:
+        import sys
+        print(f"[warn] team auth startup: {_e}", file=sys.stderr)
 
 _CORS_ORIGINS = [o.strip() for o in os.environ.get("VIGIL_CORS_ORIGINS", "").split(",") if o.strip()]
 if not _CORS_ORIGINS:
@@ -51,19 +69,27 @@ async def dashboard():
 if (DASHBOARD_DIR / "static").exists():
     app.mount("/static", StaticFiles(directory=DASHBOARD_DIR / "static"), name="static")
 
-app.include_router(ingest.router)
-app.include_router(journeys.router)
-app.include_router(replay.router)
-app.include_router(runs.router)
-app.include_router(reviews.router)
-app.include_router(ai.router)
-app.include_router(auth_routes.router)
-app.include_router(settings.router)
-app.include_router(misc.router)
-app.include_router(export.router)
-app.include_router(explorer.router)
-app.include_router(explore_mutations.router)
-app.include_router(audit.router)
+from fastapi import Depends
+
+_auth_dep = [Depends(require_auth)]
+
+# Public routes — no auth required (login, register)
+app.include_router(misc.public_router)
+
+# All other routers require a valid Bearer token
+app.include_router(misc.router, dependencies=_auth_dep)
+app.include_router(ingest.router, dependencies=_auth_dep)
+app.include_router(journeys.router, dependencies=_auth_dep)
+app.include_router(replay.router, dependencies=_auth_dep)
+app.include_router(runs.router, dependencies=_auth_dep)
+app.include_router(reviews.router, dependencies=_auth_dep)
+app.include_router(ai.router, dependencies=_auth_dep)
+app.include_router(auth_routes.router, dependencies=_auth_dep)
+app.include_router(settings.router, dependencies=_auth_dep)
+app.include_router(export.router, dependencies=_auth_dep)
+app.include_router(explorer.router, dependencies=_auth_dep)
+app.include_router(explore_mutations.router, dependencies=_auth_dep)
+app.include_router(audit.router, dependencies=_auth_dep)
 
 
 def main():
@@ -74,11 +100,15 @@ def main():
         idx = sys.argv.index("--port")
         port = int(sys.argv[idx + 1])
 
+    host = os.environ.get("VIGIL_HOST", "127.0.0.1")
+    if host not in ("127.0.0.1", "::1", "localhost"):
+        print(f"\n  ⚠️  VIGIL_HOST={host} — API is reachable on the network. Ensure auth is enabled.")
+
     print(f"\n  TestAI-Pro v1.0.0")
-    print(f"  http://localhost:{port}")
-    print(f"  API Docs: http://localhost:{port}/docs")
+    print(f"  http://{host}:{port}")
+    print(f"  API Docs: http://{host}:{port}/docs")
     print(f"  Database: {state.db.db_path}\n")
-    uvicorn.run(app, host="0.0.0.0", port=port)
+    uvicorn.run(app, host=host, port=port)
 
 
 if __name__ == "__main__":

@@ -50,10 +50,8 @@ credential_manager = CredentialManager()
 rich_event_processor = RichEventProcessor()
 shadow_dom_handler = ShadowDOMHandler()
 
-try:
-    team_auth.ensure_admin_exists()
-except Exception as _e:
-    print(f"[warn] team auth init: {_e}", file=sys.stderr)
+# Note: admin user creation happens at server startup (server.py @app.on_event("startup")),
+# not at module import time, so pytest runs don't create the admin account.
 
 try:
     monitor_scheduler.start(db)

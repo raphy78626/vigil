@@ -12,10 +12,11 @@ from pathlib import Path
 import time
 from typing import List, Optional
 
-from fastapi import APIRouter, HTTPException, UploadFile, File, WebSocket, WebSocketDisconnect, Header, Request
+from fastapi import APIRouter, Depends, HTTPException, UploadFile, File, WebSocket, WebSocketDisconnect, Header, Request
 from pydantic import BaseModel
 
 from testai import state
+from testai.team.auth import require_auth
 
 router = APIRouter()
 
@@ -114,7 +115,7 @@ async def ingest_events(req: IngestRequest, request: Request, authorization: Opt
 
 
 @router.post("/api/ingest/file")
-async def ingest_file(file: UploadFile = File(...), use_llm: bool = False):
+async def ingest_file(file: UploadFile = File(...), use_llm: bool = False, _payload: dict = Depends(require_auth)):
     """Upload an exported JSON file from the extension."""
     content = await file.read()
     events = json.loads(content)
@@ -145,9 +146,39 @@ async def ingest_file(file: UploadFile = File(...), use_llm: bool = False):
 
 
 @router.websocket("/ws/events")
-async def ws_events(websocket: WebSocket):
-    """Real-time event streaming from the extension."""
+async def ws_events(websocket: WebSocket, token: Optional[str] = None):
+    """Real-time event streaming from the extension.
+
+    Auth: pass token as a query-string parameter (?token=<bearer_token>)
+    or send an {"action": "auth", "token": "<bearer_token>"} message first.
+    """
     await websocket.accept()
+
+    # Prefer query-param auth; fall back to first-message auth
+    payload = None
+    if token:
+        payload = state.team_auth.validate_token(token)
+    if not payload:
+        # Also accept the ingest token for backward compatibility
+        if _INGEST_TOKEN and token == _INGEST_TOKEN:
+            payload = {"role": "member"}  # treat as authenticated member
+        else:
+            # Wait for an auth message before allowing events
+            try:
+                auth_msg = await websocket.receive_json()
+                if auth_msg.get("action") == "auth":
+                    t = auth_msg.get("token", "")
+                    payload = state.team_auth.validate_token(t)
+                    if not payload and _INGEST_TOKEN and t == _INGEST_TOKEN:
+                        payload = {"role": "member"}
+            except Exception:
+                pass
+
+    if not payload:
+        await websocket.send_json({"type": "error", "detail": "Authentication required."})
+        await websocket.close(code=4001)
+        return
+
     session_id = str(uuid.uuid4())
     _ws_event_buffers[session_id] = []
 

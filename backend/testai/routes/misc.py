@@ -6,13 +6,17 @@ import asyncio
 import uuid
 from typing import List, Optional
 
-from fastapi import APIRouter, HTTPException, Header
+from fastapi import APIRouter, Depends, HTTPException, Header
 from pydantic import BaseModel
 
 from testai import state
 from testai.cluster.noise_filter import NoiseFilter
+from testai.team.auth import require_auth, require_admin
 
 router = APIRouter()
+# Public router — contains only endpoints that must work without a token (login, register).
+# Import both in server.py: public_router without auth dep, router with auth dep.
+public_router = APIRouter()
 
 
 # --- Coverage API ---
@@ -290,7 +294,7 @@ class RegisterRequest(BaseModel):
     username: str
     password: str
     email: str = ""
-    role: str = "member"
+    # role is intentionally not accepted from clients — all new users start as "member"
 
 
 class LoginRequest(BaseModel):
@@ -298,17 +302,21 @@ class LoginRequest(BaseModel):
     password: str
 
 
-@router.post("/api/team/register")
+class RoleUpdateRequest(BaseModel):
+    role: str
+
+
+@public_router.post("/api/team/register")
 async def register_user(req: RegisterRequest):
-    """Register a new team member."""
+    """Register a new team member. Role is always 'member'; use /api/team/users/{id}/role to promote."""
     try:
-        user = state.team_auth.create_user(req.username, req.password, req.email, req.role)
+        user = state.team_auth.create_user(req.username, req.password, req.email, "member")
         return {"ok": True, "user": user}
     except ValueError as e:
         raise HTTPException(status_code=400, detail=str(e))
 
 
-@router.post("/api/team/login")
+@public_router.post("/api/team/login")
 async def login_user(req: LoginRequest):
     """Authenticate and receive a JWT token."""
     result = state.team_auth.login(req.username, req.password)
@@ -341,9 +349,22 @@ async def get_current_user(authorization: str = Header(default="")):
 
 
 @router.get("/api/team/users")
-async def list_users():
-    """List all team members (admin-only in production)."""
+async def list_users(_payload: dict = Depends(require_admin)):
+    """List all team members (admin only)."""
     return state.db.get_users()
+
+
+@router.patch("/api/team/users/{user_id}/role")
+async def update_user_role(user_id: str, req: RoleUpdateRequest, _payload: dict = Depends(require_admin)):
+    """Change a user's role (admin only). Allowed roles: admin, member, viewer."""
+    from testai.team.auth import ROLES
+    if req.role not in ROLES:
+        raise HTTPException(status_code=400, detail=f"Invalid role. Choose from: {', '.join(ROLES)}")
+    user = state.db.get_user(user_id)
+    if not user:
+        raise HTTPException(status_code=404, detail="User not found")
+    state.db.update_user_role(user_id, req.role)
+    return {"ok": True, "user_id": user_id, "role": req.role}
 
 
 # --- Slack/Teams Integration ---

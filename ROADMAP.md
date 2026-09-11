@@ -1,8 +1,12 @@
 # Vigil Roadmap
 
-## Current Status: Pilot-Ready v0.3 (Feb 2026)
+## Current Status: Pre-Pilot v0.4 (Sep 2026)
 
-The platform is **pilot-ready** with 98 API endpoints and 19 features validated across 4 web applications. All Phase 1.8 pilot-blocking items (9 features) have been implemented: Slack/Teams bot, Selenium export, noise filtering, multi-session merge, test suite generation, credential manager, rich event capture, and Shadow DOM support. Combined with v0.2's 11 capabilities (visual regression, cross-browser, etc.), zero gaps remain for the first external pilot.
+The core pipeline works end-to-end: capture → cluster → Playwright export → self-healing replay, validated on GitHub, Wikipedia, and Hacker News. The offline demo runs without any API key.
+
+**Not yet pilot-ready** — a September 2026 review identified trust and validity gaps that must be fixed before external pilots. See [docs/PILOT_PLAN.md](docs/PILOT_PLAN.md) for the 90-day plan and full P0 checklist.
+
+**Status of prior "19 features validated" claim:** the 19 entries were feature-flag keys in `routes/misc.py`; several features (journey merge persistence, noise filtering in the ingest path, credential-vault consumption, NL QueryEngine) were wired in name only. Wave 3 of the pilot plan addresses each one explicitly.
 
 ---
 

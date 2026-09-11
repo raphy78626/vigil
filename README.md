@@ -2,7 +2,7 @@
   <h1 align="center">Vigil</h1>
   <p align="center"><strong>Open-source passive QA capture &amp; AI test automation</strong></p>
   <p align="center">
-    Watch real users. Let AI write the tests.
+    Your team records itself. AI writes the tests.
   </p>
 </p>
 
@@ -26,7 +26,7 @@
 
 ## What Is Vigil?
 
-Vigil passively captures real user behavior through a Chrome extension, clusters interactions into meaningful journeys using AI, and generates self-healing Playwright tests that adapt when UI changes.
+Vigil passively captures your team's behavior as they use the app through a Chrome extension, clusters interactions into meaningful journeys using AI, and generates self-healing Playwright tests that adapt when UI changes. Your team records itself — no production users are watched without consent.
 
 **No test scripts to write. No selectors to maintain. No flaky tests.**
 
@@ -46,8 +46,8 @@ One click → runnable Playwright/Cypress/Selenium tests with self-healing selec
 |---------|-----------------|
 | Writing E2E tests is slow | Tests are generated from observed behavior — zero authoring |
 | Tests break when UI changes | Self-healing engine cascades through 6 selector strategies + LLM repair |
-| You don't know what to test | AI discovers journeys from real usage patterns |
-| Test data is PII-sensitive | PII redacted at capture time, before storage. Local-first — nothing leaves your machine |
+| You don't know what to test | AI discovers journeys from your team's recorded sessions |
+| Test data is PII-sensitive | Input values (passwords, emails, cards) redacted at capture. URLs and page titles stored locally. Local-first — data stays on your machine. See [Privacy & Security](#privacy--security). |
 
 ---
 
@@ -165,11 +165,11 @@ The test continues. No human intervention. The healed selector is logged but not
 Vigil is **local-first by design**:
 
 - All data stored locally (IndexedDB + SQLite)
-- PII redacted at capture time (emails, phones, cards, passwords → `[REDACTED]`)
-- LLM calls send event summaries only — no raw data or screenshots
-- Domain allowlist — only approved sites are captured
+- **Input values** redacted at capture time: passwords, emails, phone numbers, card numbers → `[REDACTED]`. URLs, page titles, and link text are stored unredacted (server-side URL redaction planned — see [PILOT_PLAN.md](docs/PILOT_PLAN.md#wave-2-core-validity-weeks-24)).
+- **LLM:** local Ollama is the default; cloud LLM (OpenAI, Anthropic, etc.) is opt-in. When enabled, event summaries including URLs and page titles are sent to the cloud provider. Raw captured values are not included in prompts.
+- Domain allowlist — only sites you explicitly add are captured. Empty allowlist captures nothing (fail-closed after v0.4).
 - Credential vault encrypted with Fernet (AES-128-CBC + HMAC); key sourced from `VIGIL_VAULT_KEY` env or auto-generated at `~/.vigil/vault.key` (0600 permissions)
-- No telemetry, no analytics, no phone-home
+- No telemetry, no analytics, no phone-home (font self-hosting planned for v0.4 — see [PILOT_PLAN.md](docs/PILOT_PLAN.md))
 - Delete all data anytime via extension settings
 
 ---

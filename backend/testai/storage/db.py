@@ -1077,6 +1077,10 @@ class Database:
         self.conn.execute("UPDATE users SET last_login = datetime('now') WHERE id = ?", (user_id,))
         self.conn.commit()
 
+    def update_user_role(self, user_id: str, role: str) -> None:
+        self.conn.execute("UPDATE users SET role = ? WHERE id = ?", (role, user_id))
+        self.conn.commit()
+
     # --- Flaky Test Management ---
 
     def analyze_flaky_tests(self) -> List[Dict]:

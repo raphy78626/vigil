@@ -21,14 +21,21 @@ const state = {
   backendUrl: 'http://127.0.0.1:8000',
 };
 
+// Restore persisted state on every SW cold start (MV3 SWs are terminated after ~30s idle).
+// Event handling is gated on this promise so the first events after a cold start don't
+// bypass an allowlist that hasn't been loaded yet.
+const _stateReady = new Promise((resolve) => {
+  chrome.storage.local.get(['enabled', 'allowlistedDomains', 'backendUrl'], (result) => {
+    // Only apply stored values that have explicitly been set by the user.
+    if (result.enabled !== undefined) state.enabled = result.enabled;
+    if (result.allowlistedDomains !== undefined) state.allowlistedDomains = result.allowlistedDomains;
+    if (result.backendUrl !== undefined) state.backendUrl = result.backendUrl;
+    resolve();
+  });
+});
 
 chrome.runtime.onInstalled.addListener(() => {
-  chrome.storage.local.get(['enabled', 'allowlistedDomains', 'backendUrl'], (result) => {
-    state.enabled = result.enabled ?? true;
-    state.allowlistedDomains = result.allowlistedDomains ?? [];
-    state.backendUrl = result.backendUrl ?? 'http://127.0.0.1:8000';
-    chrome.storage.local.set({ backendUrl: state.backendUrl });
-  });
+  chrome.storage.local.set({ backendUrl: state.backendUrl });
   chrome.action.setBadgeBackgroundColor({ color: '#6366f1' });
 });
 
@@ -39,7 +46,8 @@ chrome.runtime.onInstalled.addListener(() => {
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
   switch (message.type) {
     case 'CAPTURED_EVENT':
-      handleCapturedEvent(message.payload, sender.tab);
+      // Gate on state restoration so allowlist is honoured even on first post-idle event.
+      _stateReady.then(() => handleCapturedEvent(message.payload, sender.tab));
       sendResponse({ ok: true });
       break;
 
@@ -97,12 +105,23 @@ const NOISE_DOMAIN_PATTERNS = [
   'amplitude.com', 'sentry.io', 'newrelic.com', 'datadoghq.com',
   'intercom.io', 'intercomcdn.com', 'drift.com', 'crisp.chat',
   'onetrust.com', 'cookielaw.org', 'trustarc.com',
-  // Vigil dashboard itself — prevent self-recording
-  '127.0.0.1', 'localhost',
+  // Note: localhost / 127.0.0.1 are NOT blocked here — dev servers on those hosts
+  // can be allowlisted explicitly. The Vigil dashboard itself is blocked via the
+  // _isVigilBackend() check below, which matches the configured backendUrl precisely.
 ];
 
 function _isDomainNoise(hostname) {
   return NOISE_DOMAIN_PATTERNS.some(p => hostname.includes(p));
+}
+
+/** Block the Vigil backend/dashboard by matching the configured origin exactly. */
+function _isVigilBackend(url) {
+  try {
+    const backendOrigin = new URL(state.backendUrl).origin;
+    return url.origin === backendOrigin;
+  } catch {
+    return false;
+  }
 }
 
 function handleCapturedEvent(event, tab) {
@@ -116,14 +135,17 @@ function handleCapturedEvent(event, tab) {
     }
 
     if (_isDomainNoise(url.hostname)) return;
+    if (_isVigilBackend(url)) return;
 
-    const _effectiveAllowlist = state.allowlistedDomains.filter(
-      d => d && d !== 'all' && d !== '*'
-    );
-    if (_effectiveAllowlist.length > 0) {
-      if (!_effectiveAllowlist.some(d => url.hostname.includes(d))) {
-        return;
-      }
+    // Fail-closed: an empty allowlist means "nothing is approved yet", not "approve everything".
+    // Use 'all' or '*' as explicit wildcards to capture all non-noise sites.
+    const _effectiveAllowlist = state.allowlistedDomains.filter(d => d && d.trim());
+    if (_effectiveAllowlist.length === 0) {
+      return; // no sites approved yet — don't capture
+    }
+    const _hasWildcard = _effectiveAllowlist.some(d => d === 'all' || d === '*');
+    if (!_hasWildcard && !_effectiveAllowlist.some(d => url.hostname.includes(d))) {
+      return;
     }
 
     if (!event.isTopFrame && event.type === 'pageload') return;
