@@ -1,12 +1,74 @@
 const API = '';
 
+// ---------------------------------------------------------------------------
+// Auth helpers — token stored in localStorage, sent on every API call
+// ---------------------------------------------------------------------------
+
+function getToken() { return localStorage.getItem('vigil_token') || ''; }
+function setToken(t) { t ? localStorage.setItem('vigil_token', t) : localStorage.removeItem('vigil_token'); }
+
+function _authHeaders(extra = {}) {
+  const t = getToken();
+  return t ? { 'Authorization': `Bearer ${t}`, ...extra } : extra;
+}
+
+// Drop-in replacement for fetch() that adds the auth header automatically
+async function authFetch(url, opts = {}) {
+  const headers = { ..._authHeaders(), ...(opts.headers || {}) };
+  const res = await fetch(API + url, { ...opts, headers });
+  if (res.status === 401) { _handleUnauth(); return res; }
+  return res;
+}
+
 async function fetchJSON(url) {
-  const res = await fetch(API + url);
+  const res = await authFetch(url);
   if (!res.ok) return null;
   return res.json();
 }
 
+function _handleUnauth() {
+  setToken('');
+  document.getElementById('vigil-login-overlay').classList.remove('hidden');
+}
+
+async function _doLogin(username, password) {
+  const res = await fetch('/api/team/login', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ username, password }),
+  });
+  if (!res.ok) return false;
+  const data = await res.json();
+  setToken(data.token);
+  return true;
+}
+
+async function _loginSubmit() {
+  const username = document.getElementById('login-username').value.trim();
+  const password = document.getElementById('login-password').value;
+  const errEl = document.getElementById('login-error');
+  const btn = document.getElementById('login-btn');
+  errEl.style.display = 'none';
+  btn.disabled = true;
+  btn.textContent = 'Signing in…';
+  const ok = await _doLogin(username, password);
+  btn.disabled = false;
+  btn.textContent = 'Sign in';
+  if (!ok) {
+    errEl.textContent = 'Invalid username or password.';
+    errEl.style.display = 'block';
+    return;
+  }
+  document.getElementById('vigil-login-overlay').classList.add('hidden');
+  init();
+}
+
 async function init() {
+  // Show login overlay if no token stored; otherwise proceed straight to dashboard
+  if (!getToken()) {
+    document.getElementById('vigil-login-overlay').classList.remove('hidden');
+    return;
+  }
   const journeys = await fetchJSON('/api/journeys');
   if (journeys) _knownJourneyIds = new Set(journeys.map(j => j.id));
   loadStats();
@@ -173,7 +235,7 @@ function closeModal() {
 }
 
 async function exportPlaywright(id) {
-  const res = await fetch(`/api/journeys/${id}/export/playwright`);
+  const res = await authFetch(`/api/journeys/${id}/export/playwright`);
   const code = await res.text();
   const blob = new Blob([code], { type: 'text/plain' });
   const url = URL.createObjectURL(blob);
@@ -184,7 +246,7 @@ async function exportPlaywright(id) {
 }
 
 async function exportCypress(id) {
-  const res = await fetch(`/api/journeys/${id}/export/cypress`);
+  const res = await authFetch(`/api/journeys/${id}/export/cypress`);
   const code = await res.text();
   const blob = new Blob([code], { type: 'text/plain' });
   const url = URL.createObjectURL(blob);
@@ -252,7 +314,7 @@ async function checkAuthForUrl(url) {
     return;
   }
   try {
-    const res = await fetch(`/api/auth/check?url=${encodeURIComponent(url)}`);
+    const res = await authFetch(`/api/auth/check?url=${encodeURIComponent(url)}`);
     const data = await res.json();
     if (data.has_auth) {
       badge.className = 'auth-badge has-auth';
@@ -284,7 +346,7 @@ async function generateAuth() {
   msg.className = 'replay-auth-msg info';
 
   try {
-    const res = await fetch(`/api/auth/generate?url=${encodeURIComponent(url)}`, { method: 'POST' });
+    const res = await authFetch(`/api/auth/generate?url=${encodeURIComponent(url)}`, { method: 'POST' });
     const data = await res.json();
     if (data.ok) {
       badge.className = 'auth-badge has-auth';
@@ -326,7 +388,7 @@ async function uploadAuthFile(input) {
   const msg = document.getElementById('replay-auth-msg');
 
   try {
-    const res = await fetch(`/api/auth/upload?domain=${encodeURIComponent(domain)}`, {
+    const res = await authFetch(`/api/auth/upload?domain=${encodeURIComponent(domain)}`, {
       method: 'POST',
       body: formData,
     });
@@ -357,7 +419,7 @@ let _replayEventSource = null;
 async function checkOllamaStatus() {
   const badge = document.getElementById('ollama-status');
   try {
-    const res = await fetch('/api/heal/status');
+    const res = await authFetch('/api/heal/status');
     const data = await res.json();
     if (data.available) {
       const label = data.provider && data.provider !== 'Ollama' ? data.provider : data.model;
@@ -399,7 +461,7 @@ async function openReplayModal(journeyId, journeyName, baseUrl) {
   const envContainer = document.getElementById('replay-env-vars');
   envContainer.innerHTML = '';
   try {
-    const res = await fetch(`/api/journeys/${journeyId}/export/playwright`);
+    const res = await authFetch(`/api/journeys/${journeyId}/export/playwright`);
     const code = await res.text();
     // Match: os.environ.get("KEY", "default")  or  os.environ.get("KEY", "")
     const matches = [...code.matchAll(/os\.environ\.get\("([A-Z0-9_]+)",\s*"([^"]*)"\)/g)];
@@ -511,7 +573,7 @@ async function runExploration() {
 
   const envVars = {};
   try {
-    const res = await fetch(`/api/journeys/${journeyId}/explore`, {
+    const res = await authFetch(`/api/journeys/${journeyId}/explore`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
@@ -693,7 +755,7 @@ async function runReplay() {
   });
 
   try {
-    const res = await fetch(`/api/journeys/${journeyId}/replay`, {
+    const res = await authFetch(`/api/journeys/${journeyId}/replay`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
@@ -1075,7 +1137,7 @@ uploadBtn.addEventListener('click', async () => {
   formData.append('file', fileInput.files[0]);
 
   try {
-    const res = await fetch('/api/ingest/file', { method: 'POST', body: formData });
+    const res = await authFetch('/api/ingest/file', { method: 'POST', body: formData });
     if (!res.ok) {
       const err = await res.json().catch(() => ({ detail: res.statusText }));
       throw new Error(err.detail || res.statusText);
@@ -1125,7 +1187,7 @@ document.getElementById('chat-form').addEventListener('submit', async (e) => {
   msgs.scrollTop = msgs.scrollHeight;
 
   try {
-    const res = await fetch('/api/query', {
+    const res = await authFetch('/api/query', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ question: q }),
@@ -1238,7 +1300,7 @@ async function saveLLMSettings() {
   status.className = 'settings-status';
 
   try {
-    const res = await fetch('/api/settings/llm', {
+    const res = await authFetch('/api/settings/llm', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ provider, api_key: apiKey, model }),
@@ -1265,7 +1327,7 @@ async function testLLMConnection() {
   status.className = 'settings-status';
 
   try {
-    const res = await fetch('/api/settings/llm/test', { method: 'POST' });
+    const res = await authFetch('/api/settings/llm/test', { method: 'POST' });
     const data = await res.json();
     if (data.ok) {
       status.textContent = `Connected — "${data.response}"`;
@@ -1307,7 +1369,7 @@ async function generateNLTest() {
   output.innerHTML = '<span class="term-dim">Generating test...</span>';
 
   try {
-    const res = await fetch('/api/ai/generate-test', {
+    const res = await authFetch('/api/ai/generate-test', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ description: desc, base_url: baseUrl }),
@@ -1361,7 +1423,7 @@ async function generateCI() {
   document.getElementById('ci-output').innerHTML = '<span class="term-dim">Generating workflow...</span>';
 
   try {
-    const res = await fetch('/api/export/ci', {
+    const res = await authFetch('/api/export/ci', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ framework, base_url, cron, has_auth }),
@@ -1457,7 +1519,7 @@ let _bundlesData = null;
 async function loadSkills() {
   if (_skillsData) return;
   try {
-    const res = await fetch('/api/explorer/skills');
+    const res = await authFetch('/api/explorer/skills');
     const data = await res.json();
     _skillsData = data.skills || [];
     _bundlesData = data.bundles || {};
@@ -1559,7 +1621,7 @@ async function startExploration() {
   };
 
   try {
-    const res = await fetch('/api/explorer/start', {
+    const res = await authFetch('/api/explorer/start', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
@@ -1692,7 +1754,7 @@ async function saveExplorerJourneys() {
   const indices = Array.from(checks).map(c => parseInt(c.dataset.idx));
 
   try {
-    const res = await fetch(`/api/explorer/results/${_explorerSessionId}/save`, {
+    const res = await authFetch(`/api/explorer/results/${_explorerSessionId}/save`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ journey_indices: indices }),
@@ -1722,7 +1784,7 @@ async function generateAssertions(journeyId) {
   output.innerHTML += '<div class="assertions-loading">Generating assertions...</div>';
 
   try {
-    const res = await fetch('/api/ai/assertions', {
+    const res = await authFetch('/api/ai/assertions', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ journey_id: journeyId }),
@@ -1939,7 +2001,7 @@ function updateBatchButton() {
 }
 
 async function approveJourney(id) {
-  const res = await fetch(API + `/api/reviews/${id}/approve`, {
+  const res = await authFetch(`/api/reviews/${id}/approve`, {
     method: 'PATCH',
     headers: {'Content-Type': 'application/json'},
     body: JSON.stringify({reviewer: '', note: ''}),
@@ -1951,7 +2013,7 @@ async function approveJourney(id) {
 }
 
 async function rejectJourney(id) {
-  const res = await fetch(API + `/api/reviews/${id}/reject`, {
+  const res = await authFetch(`/api/reviews/${id}/reject`, {
     method: 'PATCH',
     headers: {'Content-Type': 'application/json'},
     body: JSON.stringify({reviewer: '', note: ''}),
@@ -1965,7 +2027,7 @@ async function rejectJourney(id) {
 async function batchApproveSelected() {
   const ids = [..._selectedReviewIds];
   if (!ids.length) return;
-  const res = await fetch(API + '/api/reviews/batch-approve', {
+  const res = await authFetch('/api/reviews/batch-approve', {
     method: 'POST',
     headers: {'Content-Type': 'application/json'},
     body: JSON.stringify({journey_ids: ids, reviewer: ''}),
@@ -2037,7 +2099,7 @@ async function submitCorrection() {
   const statusEl = document.getElementById('correct-status');
   statusEl.textContent = 'Saving...';
 
-  const res = await fetch(API + `/api/reviews/${id}/correct`, {
+  const res = await authFetch(`/api/reviews/${id}/correct`, {
     method: 'PATCH',
     headers: {'Content-Type': 'application/json'},
     body: JSON.stringify(body),
@@ -2080,7 +2142,7 @@ async function saveHITLConfig() {
   const statusEl = document.getElementById('hitl-config-status');
   statusEl.textContent = 'Saving...';
 
-  const res = await fetch(API + '/api/hitl/config', {
+  const res = await authFetch('/api/hitl/config', {
     method: 'PATCH',
     headers: {'Content-Type': 'application/json'},
     body: JSON.stringify({auto_approve_threshold: threshold}),
@@ -2331,7 +2393,7 @@ async function runSiteAudit() {
   document.getElementById('audit-run-btn').disabled = true;
 
   try {
-    const res = await fetch('/api/audit', {
+    const res = await authFetch('/api/audit', {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify({url, depth: 1}),
@@ -2608,7 +2670,7 @@ async function saveExpandedJourneys() {
   statusEl.textContent = 'Saving...';
 
   try {
-    const res = await fetch(`/api/explorer/results/${_expandSessionId}/save`, {
+    const res = await authFetch(`/api/explorer/results/${_expandSessionId}/save`, {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify({journey_indices: []}),

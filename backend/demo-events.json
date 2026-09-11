@@ -1,13 +1,13 @@
 [
   {
-    "id": "ce406d1a-e018-4bb1-81e0-a7d43536fe01",
-    "timestamp": 1774542474981,
-    "isoTime": "2026-03-26T21:57:54.981000",
+    "id": "ee9a54fa-c032-4268-b1cc-80df87b4b664",
+    "timestamp": 1789129985602,
+    "isoTime": "2026-09-11T18:03:05.602000",
     "type": "pageload",
     "url": "https://www.saucedemo.com/",
     "pageTitle": "Swag Labs",
     "tabId": 1,
-    "sessionId": "bcbf168a-3d2a-47b9-a9f4-bfe7d9ec2f47",
+    "sessionId": "3035d563-9852-4727-8bab-77717d8cdd3f",
     "element": null,
     "navigation": {
       "fromUrl": "",
@@ -16,14 +16,14 @@
     }
   },
   {
-    "id": "4a85ab46-e77a-4a59-bf9d-dd1479b1289c",
-    "timestamp": 1774542479981,
-    "isoTime": "2026-03-26T21:57:59.981000",
+    "id": "c985248b-75e9-44a1-a996-d4cce088c310",
+    "timestamp": 1789129990602,
+    "isoTime": "2026-09-11T18:03:10.602000",
     "type": "click",
     "url": "https://www.saucedemo.com/",
     "pageTitle": "Swag Labs",
     "tabId": 1,
-    "sessionId": "bcbf168a-3d2a-47b9-a9f4-bfe7d9ec2f47",
+    "sessionId": "3035d563-9852-4727-8bab-77717d8cdd3f",
     "element": {
       "tagName": "input",
       "selectors": {
@@ -42,14 +42,14 @@
     "navigation": null
   },
   {
-    "id": "7705d171-2fc0-4cfa-810c-16fbb0927ffc",
-    "timestamp": 1774542484981,
-    "isoTime": "2026-03-26T21:58:04.981000",
+    "id": "40e30e2e-6c2d-4526-8073-a2fdeccb41aa",
+    "timestamp": 1789129995602,
+    "isoTime": "2026-09-11T18:03:15.602000",
     "type": "input",
     "url": "https://www.saucedemo.com/",
     "pageTitle": "Swag Labs",
     "tabId": 1,
-    "sessionId": "bcbf168a-3d2a-47b9-a9f4-bfe7d9ec2f47",
+    "sessionId": "3035d563-9852-4727-8bab-77717d8cdd3f",
     "element": {
       "tagName": "input",
       "selectors": {
@@ -68,14 +68,14 @@
     "navigation": null
   },
   {
-    "id": "92b34f9f-d3a7-4447-8a75-ed42c6f859b0",
-    "timestamp": 1774542489981,
-    "isoTime": "2026-03-26T21:58:09.981000",
+    "id": "e289f0fa-3c3e-4473-a955-7051904e1271",
+    "timestamp": 1789130000602,
+    "isoTime": "2026-09-11T18:03:20.602000",
     "type": "click",
     "url": "https://www.saucedemo.com/",
     "pageTitle": "Swag Labs",
     "tabId": 1,
-    "sessionId": "bcbf168a-3d2a-47b9-a9f4-bfe7d9ec2f47",
+    "sessionId": "3035d563-9852-4727-8bab-77717d8cdd3f",
     "element": {
       "tagName": "input",
       "selectors": {
@@ -94,14 +94,14 @@
     "navigation": null
   },
   {
-    "id": "6c73bab1-8226-4a5f-8d0d-f79d2bd15a90",
-    "timestamp": 1774542492981,
-    "isoTime": "2026-03-26T21:58:12.981000",
+    "id": "b3c8fac9-d55f-4ac6-b9ec-7e1848dfb0c6",
+    "timestamp": 1789130003602,
+    "isoTime": "2026-09-11T18:03:23.602000",
     "type": "input",
     "url": "https://www.saucedemo.com/",
     "pageTitle": "Swag Labs",
     "tabId": 1,
-    "sessionId": "bcbf168a-3d2a-47b9-a9f4-bfe7d9ec2f47",
+    "sessionId": "3035d563-9852-4727-8bab-77717d8cdd3f",
     "element": {
       "tagName": "input",
       "selectors": {
@@ -120,14 +120,14 @@
     "navigation": null
   },
   {
-    "id": "bb2b064e-bda0-4932-be28-bde43976fc4a",
-    "timestamp": 1774542496981,
-    "isoTime": "2026-03-26T21:58:16.981000",
+    "id": "517f06c2-1238-4103-8e57-befd248095eb",
+    "timestamp": 1789130007602,
+    "isoTime": "2026-09-11T18:03:27.602000",
     "type": "click",
     "url": "https://www.saucedemo.com/",
     "pageTitle": "Swag Labs",
     "tabId": 1,
-    "sessionId": "bcbf168a-3d2a-47b9-a9f4-bfe7d9ec2f47",
+    "sessionId": "3035d563-9852-4727-8bab-77717d8cdd3f",
     "element": {
       "tagName": "input",
       "selectors": {
@@ -146,14 +146,14 @@
     "navigation": null
   },
   {
-    "id": "54fb935f-49ae-4c91-ac27-1ec292b51df2",
-    "timestamp": 1774542499981,
-    "isoTime": "2026-03-26T21:58:19.981000",
+    "id": "a67cc014-ad91-4bfe-8ea8-69493fc3fdfe",
+    "timestamp": 1789130010602,
+    "isoTime": "2026-09-11T18:03:30.602000",
     "type": "navigation",
     "url": "https://www.saucedemo.com/inventory.html",
     "pageTitle": "Swag Labs",
     "tabId": 1,
-    "sessionId": "bcbf168a-3d2a-47b9-a9f4-bfe7d9ec2f47",
+    "sessionId": "3035d563-9852-4727-8bab-77717d8cdd3f",
     "element": null,
     "navigation": {
       "fromUrl": "https://www.saucedemo.com/",
@@ -162,14 +162,14 @@
     }
   },
   {
-    "id": "9922235b-acef-4f05-aeb2-0f41ac9997d6",
-    "timestamp": 1774542500981,
-    "isoTime": "2026-03-26T21:58:20.981000",
+    "id": "13ef11bb-b9ff-4466-b350-f167c7a580ae",
+    "timestamp": 1789130011602,
+    "isoTime": "2026-09-11T18:03:31.602000",
     "type": "pageload",
     "url": "https://www.saucedemo.com/inventory.html",
     "pageTitle": "Swag Labs",
     "tabId": 1,
-    "sessionId": "bcbf168a-3d2a-47b9-a9f4-bfe7d9ec2f47",
+    "sessionId": "3035d563-9852-4727-8bab-77717d8cdd3f",
     "element": null,
     "navigation": {
       "fromUrl": "https://www.saucedemo.com/",
@@ -178,14 +178,14 @@
     }
   },
   {
-    "id": "cd7477a5-8c5a-4efc-9804-066d1a5502ef",
-    "timestamp": 1774542534981,
-    "isoTime": "2026-03-26T21:58:54.981000",
+    "id": "43a44d1f-a6d9-4d99-af8c-77f8c9b4761d",
+    "timestamp": 1789130045602,
+    "isoTime": "2026-09-11T18:04:05.602000",
     "type": "click",
     "url": "https://www.saucedemo.com/inventory.html",
     "pageTitle": "Swag Labs",
     "tabId": 1,
-    "sessionId": "bcbf168a-3d2a-47b9-a9f4-bfe7d9ec2f47",
+    "sessionId": "3035d563-9852-4727-8bab-77717d8cdd3f",
     "element": {
       "tagName": "div",
       "selectors": {
@@ -204,14 +204,14 @@
     "navigation": null
   },
   {
-    "id": "977205d4-c582-44bc-8b6b-783eab30bc03",
-    "timestamp": 1774542537981,
-    "isoTime": "2026-03-26T21:58:57.981000",
+    "id": "62644230-c775-44b8-bc8f-88003c082293",
+    "timestamp": 1789130048602,
+    "isoTime": "2026-09-11T18:04:08.602000",
     "type": "pageload",
     "url": "https://www.saucedemo.com/inventory-item.html?id=4",
     "pageTitle": "Swag Labs",
     "tabId": 1,
-    "sessionId": "bcbf168a-3d2a-47b9-a9f4-bfe7d9ec2f47",
+    "sessionId": "3035d563-9852-4727-8bab-77717d8cdd3f",
     "element": null,
     "navigation": {
       "fromUrl": "https://www.saucedemo.com/inventory.html",
@@ -220,14 +220,14 @@
     }
   },
   {
-    "id": "abb89264-d015-4550-8a3f-2bae839a2907",
-    "timestamp": 1774542544981,
-    "isoTime": "2026-03-26T21:59:04.981000",
+    "id": "3732d0af-8544-47c6-bc92-6d2a7fd9909a",
+    "timestamp": 1789130055602,
+    "isoTime": "2026-09-11T18:04:15.602000",
     "type": "click",
     "url": "https://www.saucedemo.com/inventory-item.html?id=4",
     "pageTitle": "Swag Labs",
     "tabId": 1,
-    "sessionId": "bcbf168a-3d2a-47b9-a9f4-bfe7d9ec2f47",
+    "sessionId": "3035d563-9852-4727-8bab-77717d8cdd3f",
     "element": {
       "tagName": "button",
       "selectors": {
@@ -246,14 +246,14 @@
     "navigation": null
   },
   {
-    "id": "f92b8a91-0377-4ade-92f4-d8da2bd469e8",
-    "timestamp": 1774542549981,
-    "isoTime": "2026-03-26T21:59:09.981000",
+    "id": "ec16e8f0-5db9-484b-8ab5-1e442c1e427b",
+    "timestamp": 1789130060602,
+    "isoTime": "2026-09-11T18:04:20.602000",
     "type": "click",
     "url": "https://www.saucedemo.com/inventory-item.html?id=4",
     "pageTitle": "Swag Labs",
     "tabId": 1,
-    "sessionId": "bcbf168a-3d2a-47b9-a9f4-bfe7d9ec2f47",
+    "sessionId": "3035d563-9852-4727-8bab-77717d8cdd3f",
     "element": {
       "tagName": "button",
       "selectors": {
@@ -272,14 +272,14 @@
     "navigation": null
   },
   {
-    "id": "5d6a9cb1-5f5b-48ac-8133-dc633af47263",
-    "timestamp": 1774542551981,
-    "isoTime": "2026-03-26T21:59:11.981000",
+    "id": "d2ef895a-5597-4637-8bf2-05691da3d07e",
+    "timestamp": 1789130062602,
+    "isoTime": "2026-09-11T18:04:22.602000",
     "type": "navigation",
     "url": "https://www.saucedemo.com/inventory.html",
     "pageTitle": "Swag Labs",
     "tabId": 1,
-    "sessionId": "bcbf168a-3d2a-47b9-a9f4-bfe7d9ec2f47",
+    "sessionId": "3035d563-9852-4727-8bab-77717d8cdd3f",
     "element": null,
     "navigation": {
       "fromUrl": "https://www.saucedemo.com/inventory-item.html?id=4",
@@ -288,14 +288,14 @@
     }
   },
   {
-    "id": "b867a47b-c35a-4970-b7a0-30ef825be1c9",
-    "timestamp": 1774542564981,
-    "isoTime": "2026-03-26T21:59:24.981000",
+    "id": "e66b72ec-efeb-4898-ac19-0cd5acc12840",
+    "timestamp": 1789130075602,
+    "isoTime": "2026-09-11T18:04:35.602000",
     "type": "click",
     "url": "https://www.saucedemo.com/inventory.html",
     "pageTitle": "Swag Labs",
     "tabId": 1,
-    "sessionId": "bcbf168a-3d2a-47b9-a9f4-bfe7d9ec2f47",
+    "sessionId": "3035d563-9852-4727-8bab-77717d8cdd3f",
     "element": {
       "tagName": "button",
       "selectors": {
@@ -314,14 +314,14 @@
     "navigation": null
   },
   {
-    "id": "6424db4f-7e87-4384-96d8-0776ef901536",
-    "timestamp": 1774542594981,
-    "isoTime": "2026-03-26T21:59:54.981000",
+    "id": "5ec00f38-0045-440b-9178-1fa83bf13578",
+    "timestamp": 1789130105602,
+    "isoTime": "2026-09-11T18:05:05.602000",
     "type": "click",
     "url": "https://www.saucedemo.com/inventory.html",
     "pageTitle": "Swag Labs",
     "tabId": 1,
-    "sessionId": "bcbf168a-3d2a-47b9-a9f4-bfe7d9ec2f47",
+    "sessionId": "3035d563-9852-4727-8bab-77717d8cdd3f",
     "element": {
       "tagName": "a",
       "selectors": {
@@ -340,14 +340,14 @@
     "navigation": null
   },
   {
-    "id": "3c61cbd8-39e1-456c-8000-f0da562b7631",
-    "timestamp": 1774542596981,
-    "isoTime": "2026-03-26T21:59:56.981000",
+    "id": "37acaa78-8167-49db-a2de-ab24614e29e9",
+    "timestamp": 1789130107602,
+    "isoTime": "2026-09-11T18:05:07.602000",
     "type": "pageload",
     "url": "https://www.saucedemo.com/cart.html",
     "pageTitle": "Swag Labs",
     "tabId": 1,
-    "sessionId": "bcbf168a-3d2a-47b9-a9f4-bfe7d9ec2f47",
+    "sessionId": "3035d563-9852-4727-8bab-77717d8cdd3f",
     "element": null,
     "navigation": {
       "fromUrl": "https://www.saucedemo.com/inventory.html",
@@ -356,14 +356,14 @@
     }
   },
   {
-    "id": "1e5483b5-ae70-4ff9-ad81-27ecb3de73f0",
-    "timestamp": 1774542604981,
-    "isoTime": "2026-03-26T22:00:04.981000",
+    "id": "bb05492e-f469-4a7f-8623-61efa0c63497",
+    "timestamp": 1789130115602,
+    "isoTime": "2026-09-11T18:05:15.602000",
     "type": "click",
     "url": "https://www.saucedemo.com/cart.html",
     "pageTitle": "Swag Labs",
     "tabId": 1,
-    "sessionId": "bcbf168a-3d2a-47b9-a9f4-bfe7d9ec2f47",
+    "sessionId": "3035d563-9852-4727-8bab-77717d8cdd3f",
     "element": {
       "tagName": "button",
       "selectors": {
@@ -382,14 +382,14 @@
     "navigation": null
   },
   {
-    "id": "735579f2-25d4-4a9f-9255-6d493d2e26f1",
-    "timestamp": 1774542606981,
-    "isoTime": "2026-03-26T22:00:06.981000",
+    "id": "ec51ed18-6500-443e-9284-71de95c73852",
+    "timestamp": 1789130117602,
+    "isoTime": "2026-09-11T18:05:17.602000",
     "type": "pageload",
     "url": "https://www.saucedemo.com/checkout-step-one.html",
     "pageTitle": "Swag Labs",
     "tabId": 1,
-    "sessionId": "bcbf168a-3d2a-47b9-a9f4-bfe7d9ec2f47",
+    "sessionId": "3035d563-9852-4727-8bab-77717d8cdd3f",
     "element": null,
     "navigation": {
       "fromUrl": "https://www.saucedemo.com/cart.html",
@@ -398,14 +398,14 @@
     }
   },
   {
-    "id": "f9d1db10-e60d-4429-8f32-adcea2e0daba",
-    "timestamp": 1774542612981,
-    "isoTime": "2026-03-26T22:00:12.981000",
+    "id": "557dc307-8800-486b-9c14-6ab9a4384cb7",
+    "timestamp": 1789130123602,
+    "isoTime": "2026-09-11T18:05:23.602000",
     "type": "input",
     "url": "https://www.saucedemo.com/checkout-step-one.html",
     "pageTitle": "Swag Labs",
     "tabId": 1,
-    "sessionId": "bcbf168a-3d2a-47b9-a9f4-bfe7d9ec2f47",
+    "sessionId": "3035d563-9852-4727-8bab-77717d8cdd3f",
     "element": {
       "tagName": "input",
       "selectors": {
@@ -424,14 +424,14 @@
     "navigation": null
   },
   {
-    "id": "4b0b0884-ae16-49b5-aab9-73d16f5780c8",
-    "timestamp": 1774542616981,
-    "isoTime": "2026-03-26T22:00:16.981000",
+    "id": "5f6f3c41-8eae-4e85-9f5c-15889f4836b4",
+    "timestamp": 1789130127602,
+    "isoTime": "2026-09-11T18:05:27.602000",
     "type": "input",
     "url": "https://www.saucedemo.com/checkout-step-one.html",
     "pageTitle": "Swag Labs",
     "tabId": 1,
-    "sessionId": "bcbf168a-3d2a-47b9-a9f4-bfe7d9ec2f47",
+    "sessionId": "3035d563-9852-4727-8bab-77717d8cdd3f",
     "element": {
       "tagName": "input",
       "selectors": {
@@ -450,14 +450,14 @@
     "navigation": null
   },
   {
-    "id": "ffa5d9e2-dcaf-459b-8769-b65f43aeba44",
-    "timestamp": 1774542620981,
-    "isoTime": "2026-03-26T22:00:20.981000",
+    "id": "c9a20dc8-7155-4a48-9fd3-1df378091796",
+    "timestamp": 1789130131602,
+    "isoTime": "2026-09-11T18:05:31.602000",
     "type": "input",
     "url": "https://www.saucedemo.com/checkout-step-one.html",
     "pageTitle": "Swag Labs",
     "tabId": 1,
-    "sessionId": "bcbf168a-3d2a-47b9-a9f4-bfe7d9ec2f47",
+    "sessionId": "3035d563-9852-4727-8bab-77717d8cdd3f",
     "element": {
       "tagName": "input",
       "selectors": {
@@ -476,14 +476,14 @@
     "navigation": null
   },
   {
-    "id": "3a15fe5a-9ab3-46c8-8b61-3ef07f4d04d3",
-    "timestamp": 1774542624981,
-    "isoTime": "2026-03-26T22:00:24.981000",
+    "id": "092f2440-96aa-430b-be4a-88699a582236",
+    "timestamp": 1789130135602,
+    "isoTime": "2026-09-11T18:05:35.602000",
     "type": "click",
     "url": "https://www.saucedemo.com/checkout-step-one.html",
     "pageTitle": "Swag Labs",
     "tabId": 1,
-    "sessionId": "bcbf168a-3d2a-47b9-a9f4-bfe7d9ec2f47",
+    "sessionId": "3035d563-9852-4727-8bab-77717d8cdd3f",
     "element": {
       "tagName": "input",
       "selectors": {
@@ -502,14 +502,14 @@
     "navigation": null
   },
   {
-    "id": "dfd5d3a4-b0eb-4dba-b033-bc6588c3f36a",
-    "timestamp": 1774542626981,
-    "isoTime": "2026-03-26T22:00:26.981000",
+    "id": "9a01ccc0-0bcc-40e5-b6a7-28be3ea8153f",
+    "timestamp": 1789130137602,
+    "isoTime": "2026-09-11T18:05:37.602000",
     "type": "pageload",
     "url": "https://www.saucedemo.com/checkout-step-two.html",
     "pageTitle": "Swag Labs",
     "tabId": 1,
-    "sessionId": "bcbf168a-3d2a-47b9-a9f4-bfe7d9ec2f47",
+    "sessionId": "3035d563-9852-4727-8bab-77717d8cdd3f",
     "element": null,
     "navigation": {
       "fromUrl": "https://www.saucedemo.com/checkout-step-one.html",
@@ -518,14 +518,14 @@
     }
   },
   {
-    "id": "d1d9aa2b-661d-44e0-9791-4993db6ff34d",
-    "timestamp": 1774542634981,
-    "isoTime": "2026-03-26T22:00:34.981000",
+    "id": "3988fc82-885e-4242-ac19-0659946db77a",
+    "timestamp": 1789130145602,
+    "isoTime": "2026-09-11T18:05:45.602000",
     "type": "click",
     "url": "https://www.saucedemo.com/checkout-step-two.html",
     "pageTitle": "Swag Labs",
     "tabId": 1,
-    "sessionId": "bcbf168a-3d2a-47b9-a9f4-bfe7d9ec2f47",
+    "sessionId": "3035d563-9852-4727-8bab-77717d8cdd3f",
     "element": {
       "tagName": "button",
       "selectors": {
@@ -544,14 +544,14 @@
     "navigation": null
   },
   {
-    "id": "ba5c9bc7-930c-4049-8da7-28593668037d",
-    "timestamp": 1774542636981,
-    "isoTime": "2026-03-26T22:00:36.981000",
+    "id": "1102d789-afe8-4b82-bc99-1027db16fc54",
+    "timestamp": 1789130147602,
+    "isoTime": "2026-09-11T18:05:47.602000",
     "type": "pageload",
     "url": "https://www.saucedemo.com/checkout-complete.html",
     "pageTitle": "Swag Labs",
     "tabId": 1,
-    "sessionId": "bcbf168a-3d2a-47b9-a9f4-bfe7d9ec2f47",
+    "sessionId": "3035d563-9852-4727-8bab-77717d8cdd3f",
     "element": null,
     "navigation": {
       "fromUrl": "https://www.saucedemo.com/checkout-step-two.html",
