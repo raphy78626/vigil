@@ -20,7 +20,14 @@ Browse your app → Vigil captures it → AI names the journey → Tests generat
 
 4. **Heal** — When a selector fails at replay, Vigil tries the cascade in order. Last resort: screenshot + test source sent to an LLM to get a patched function back. The test continues. No human needed.
 
-![Architecture](docs/diagrams/architecture.png)
+```mermaid
+graph LR
+    A["🧑 Your team\nuses the app"] -->|Chrome extension\nrecords every click| B["📋 Raw events\nin SQLite"]
+    B -->|AI segments\n& labels| C["🗂️ Named journeys\n'Guest Checkout'"]
+    C -->|One click| D["🧪 Playwright /\nCypress / Selenium"]
+    D -->|UI changes?| E["🔧 Self-healing\nengine"]
+    E -->|Recovered| F["✅ CI stays green"]
+```
 
 ---
 
@@ -73,7 +80,24 @@ Real example from a Wikipedia run:
 [heal]   ARIA get_by_role("searchbox") → FOUND ✓
 ```
 
-![Replay & Healing](docs/diagrams/replay-healing.png)
+```mermaid
+flowchart TD
+    A[Selector fails] --> B{Try CSS}
+    B -->|miss| C{Try XPath}
+    C -->|miss| D{Try ARIA}
+    D -->|miss| E{Try visible text}
+    E -->|miss| F{Try placeholder}
+    F -->|miss| G{Try test-id}
+    G -->|miss| H[LLM repair\nscreenshot + source]
+    B -->|hit| Z[✅ Step passes]
+    C -->|hit| Z
+    D -->|hit| Z
+    E -->|hit| Z
+    F -->|hit| Z
+    G -->|hit| Z
+    H -->|patched| Z
+    H -->|fail| X[❌ Step fails]
+```
 
 ---
 
